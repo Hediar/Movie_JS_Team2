@@ -1,87 +1,156 @@
 :root {
-    /* color */
-    --color-bright-green: rgb(253,253,245);
-    --color-white: rgb(253,253,245);
-    --color-green: rgb(56,106,32);
-    --color-light-green:rgb(184,243,151);
-    --color-blue: #3b88c3;
-    --color-yellow: #fbbe28;
-    --color-pink: rgb(240,80,110);
-    --color-light-grey: #dfdfdf;
-    --color-mint: rgb(191,237,217);
-    --color-black: #3f454d;
-  
-    /* size */
-    --base-space: 8px;
-    --size-button: 60px;
-    --size-border: 4px;
-    --size-thumbnail: 50px;
-    --font-size: 18px;
-  
-  }
+  /* color */
+  --color-bright-green: rgb(253, 253, 245);
+  --color-white: rgb(253, 253, 245);
+  --color-green: rgb(56, 106, 32);
+  --color-light-green: rgb(184, 243, 151);
+  --color-blue: #3b88c3;
+  --color-yellow: #fbbe28;
+  --color-pink: rgb(240, 80, 110);
+  --color-light-grey: #dfdfdf;
+  --color-mint: rgb(191, 237, 217);
+  --color-black: #3f454d;
 
-  body {
-    height: 100vh;
-    background-color: rgb(23, 21, 21); 
-    
-  }
-  .title{
-    height: 300px;
-    width: 1000px;
-    margin: 0 auto;
-    font-size: 2rem;
-    line-height: 45px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    left: 0;
-    bottom: 0;
-    color: white;
-  }
-  .search{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 20px 0;
-  }
-  .search input{
-    margin-left: 20px;
-    min-width: 200px;
-    padding: 5px 10px;
-  }
-  .search button{
-    margin-left: 10px;
-    padding: 5px;
-  }
+  /* size */
+  --base-space: 8px;
+  --size-button: 60px;
+  --size-border: 4px;
+  --size-thumbnail: 50px;
+  --font-size: 18px;
+}
 
-  .movie-wrap{
-    display: grid;
-    /* grid-template-columns: repeat(3,1fr); */
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    justify-content: center;
-  }
+body {
+  height: 100vh;
+  background-color: rgb(23, 21, 21);
+}
+.title {
+  height: 300px;
+  width: 1000px;
+  margin: 0 auto;
+  font-size: 2rem;
+  line-height: 45px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  color: white;
+}
+.search {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+.search input {
+  margin-left: 20px;
+  min-width: 200px;
+  padding: 5px 10px;
+}
+.search button {
+  margin-left: 10px;
+  padding: 5px;
+}
 
-  .movie-card{
-    background-color: rgb(102,30,45);
-    color: white;
-    margin: 20px;
-    padding: 20px;
-    width: 300px;
-    justify-self: center;
-    border-radius: 10px;
-  }
+.movie-wrap {
+  display: grid;
+  /* grid-template-columns: repeat(3,1fr); */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  justify-content: center;
+}
 
-  .movie-card:hover {
-    cursor:pointer;
-  }
-  
-  .movie-card img {
-    width: 100%;
-    border-radius: 10px;
-  }
+.movie-card {
+  background-color: rgb(102, 30, 45);
+  color: white;
+  margin: 20px;
+  padding: 20px;
+  width: 300px;
+  justify-self: center;
+  border-radius: 10px;
+}
 
+.movie-card:hover {
+  cursor: pointer;
+}
 
-  
+.movie-card img {
+  width: 100%;
+  border-radius: 10px;
+}
 
+/* --------------------------------------------------------------------------------------- */
+.movie-wrap {
+  /* display: grid; */
+  /* grid-template-columns: repeat(3,1fr); */
+  /* grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.movieCard {
+  background-color: rgb(102, 30, 45);
+  color: white;
+  margin: 20px;
+  padding: 20px;
+  width: 90%;
+  /* justify-self: center; */
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.movieCard:hover {
+  cursor: pointer;
+}
+
+.movieCard img {
+  width: 50%;
+  border-radius: 10px;
+
+  margin-right: 20px;
+}
+
+.table {
+  margin: auto;
+  font-size: 18px;
+  width: 90%;
+  border: 1px solid white;
+  border-collapse: collapse;
+
+  color: white;
+}
+
+thead > tr > th {
+  padding: 20px;
+}
+
+tr,
+td {
+  border-bottom: 1px solid white;
+  padding: 10px;
+}
+
+.menu {
+  width: 20%;
+  margin-left: auto;
+}
+.menu > ul {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu > ul > a {
+  text-decoration: none;
+  color: white;
+  font-weight: 60px;
+}
+
+.menu > ul > a:hover {
+  color: gray;
+}
