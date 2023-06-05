@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie info</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="src/infopage.js"></script>
+  </head>
+  <body>
+    <div class="menu">
+      <ul id="nav-bar">
+        <a href="http://127.0.0.1:5500/index.html?"><li>메인 페이지</li></a>
+      </ul>
+    </div>
+    <header class="title">
+      <h1>영화 컬렉션</h1>
+    </header>
+    <section class="movieWrap">
+      <!-- <div class="movieInfoCard" id="${movie.id}">
+        <div class="movieCard">
+          <img
+            src="https://cdn.pixabay.com/photo/2017/12/28/17/10/motorcycles-3045706_640.jpg"
+            class="moviePoster"
+          />
+          <div class="movieBody">
+            <h3 class="movieTitle">The Godfather</h3>
+            <p>Rating: 8.7</p>
+            <p class="movieOverview">
+              Spanning the years 1945 to 1955, a chronicle of the fictional
+              Italian-American Corleone crime family.
+            </p>
+          </div>
+        </div>
+      </div> -->
+    </section>
+    <table class="table">
+      <tbody>
+        <tr class="comment-show">
+          <td>너무 재미있었어요!</td>
+          <td>
+            <input
+              onclick="save_form()"
+              class="formButton"
+              type="submit"
+              value="수정"
+            />
+            <input
+              onclick="save_form()"
+              class="formButton"
+              type="submit"
+              value="삭제"
+            />
+          </td>
+        </tr>
+        <tr class="comment-show">
+          <td>너무 재미있었어요!</td>
+          <td>
+            <input
+              onclick="save_form()"
+              class="formButton"
+              type="submit"
+              value="수정"
+            />
+            <input
+              onclick="save_form()"
+              class="formButton"
+              type="submit"
+              value="삭제"
+            />
+          </td>
+        </tr>
+        <tr class="comment-show">
+          <td>너무 재미있었어요!</td>
+          <td>
+            <input
+              onclick="save_form()"
+              class="formButton"
+              type="submit"
+              value="수정"
+            />
+            <input
+              onclick="save_form()"
+              class="formButton"
+              type="submit"
+              value="삭제"
+            />
+          </td>
+        </tr>
+        <tr class="form">
+          <td>
+            <textarea
+              id="comment"
+              class="comment"
+              cols="100"
+              rows="2"
+              placeholder="응원 메시지를 남겨주세요."
+            ></textarea>
+          </td>
+          <td>
+            <input
+              onclick="save_form()"
+              class="formButton"
+              type="submit"
+              value="응원하기"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
