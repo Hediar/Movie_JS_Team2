@@ -17,111 +17,15 @@ const loadmovies = async () => {
   return data["results"];
 };
 
-// // HTML UPDATE
-// function displaymovies(movies) {
-//   const container = document.querySelector(".movie-wrap");
-//   container.innerHTML = movies.map((movie) => createMovieCards(movie)).join("");
-//   onClickCard();
-// }
-
-// // HTML list 만들기
-// function createMovieCards(movie) {
-//   let temp_html = `
-//         <div class="movie-card" id="${movie.id}">
-//             <div class="movie">
-//               <img
-//                 src="https://image.tmdb.org/t/p/w300/${movie.poster_path}"
-//                 class="movie_poster"
-//               />
-//               <div class="movie_body">
-//                 <h3 class="movie_title">${movie.original_title}</h3>
-//                 <p>Rating: ${movie.vote_average}</p>
-//               </div>
-//               <div class="movie_footer">
-//                 <p class="movie_overview">
-//                   ${movie.overview}
-//                 </p>
-//               </div>
-//             </div>
-//           </div>
-//         `;
-//   return temp_html;
-// }
-
-// // 클릭 이벤트 alert로 해당 movie id 나오게 만들기
-// const onClickCard = function () {
-//   const cards = document.querySelectorAll(".movie-card");
-//   cards.forEach((card) => {
-//     card.addEventListener("click", function () {
-//       let id = this.getAttribute("id");
-//       alert("해당 영화의 id는 " + id + "입니다.");
-//     });
-//   });
-// };
-
-// // 검색 기능 : 대소문자 관계없이, enter입력해도 검색 클릭과 동일한 기능
-// const findTitle = function (movies) {
-//   // input값 가져와서 title과 비교하기
-//   let search = document.getElementById("search-input").value.toLowerCase();
-
-//   // 버튼 클릭이나 엔터 키 입력되었을 때 실행
-//   const filtermovie = movies.filter((movie) =>
-//     movie.original_title.toLowerCase().includes(search)
-//   );
-
-//   // console.log(filtermovie);
-//   displaymovies(filtermovie);
-// };
-
-// // 이벤트 관리
-// function setEventListeners(movies) {
-//   const form = document.querySelector(".search");
-//   // 검색창에 입력 수행 시
-//   form.addEventListener("submit", (event) => {
-//     event.preventDefault();
-//     findTitle(movies);
-//   });
-//   // 카드 클릭 이벤트
-//   //onClickCard();
-// }
-
-// // main
-// loadmovies().then((movies) => {
-//   displaymovies(movies);
-//   setEventListeners(movies);
-// });
-
-/* --------------------------------------------------------------------------------------- */
-
-// 클릭 이벤트 상세페이지 이동하기
-const onClickCard = function () {
-  const cards = document.querySelectorAll(".movie-card");
-  cards.forEach((card) => {
-    card.addEventListener("click", function () {
-      const url = "https://example.com/new-page"; // 이동하고자 하는 페이지의 URL
-      window.location.href = url; // 페이지 이동
-    });
-  });
-};
-
-function getMovieById(movies, id) {
-  return movies.find((movie) => movie.id === id);
-}
-
 // HTML UPDATE
-function displaymovie(movies, id) {
+function displaymovies(movies) {
   const container = document.querySelector(".movie-wrap");
-  const movie = getMovieById(movies, id);
-  if (movie) {
-    container.innerHTML = createMovieCard(movie);
-    onClickCard();
-  } else {
-    container.innerHTML = "해당 id에 해당하는 영화를 찾을 수 없습니다.";
-  }
+  container.innerHTML = movies.map((movie) => createMovieCards(movie)).join("");
+  onClickCard();
 }
 
-// 해당 id에 해당하는 HTML 만들기
-function createMovieCard(movie) {
+// HTML list 만들기
+function createMovieCards(movie) {
   let temp_html = `
         <div class="movie-card" id="${movie.id}">
             <div class="movie">
@@ -144,7 +48,47 @@ function createMovieCard(movie) {
   return temp_html;
 }
 
+// 검색 기능 : 대소문자 관계없이, enter입력해도 검색 클릭과 동일한 기능
+const findTitle = function (movies) {
+  // input값 가져와서 title과 비교하기
+  let search = document.getElementById("search-input").value.toLowerCase();
+
+  // 버튼 클릭이나 엔터 키 입력되었을 때 실행
+  const filtermovie = movies.filter((movie) =>
+    movie.original_title.toLowerCase().includes(search)
+  );
+
+  // console.log(filtermovie);
+  displaymovies(filtermovie);
+};
+
+// 이벤트 관리
+function setEventListeners(movies) {
+  const form = document.querySelector(".search");
+  // 검색창에 입력 수행 시
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    findTitle(movies);
+  });
+  // 카드 클릭 이벤트
+  //onClickCard();
+}
+
 // main
 loadmovies().then((movies) => {
-  displaymovie(movies, id);
+  displaymovies(movies);
+  setEventListeners(movies);
 });
+
+/* --------------------------------------------------------------------------------------- */
+
+// 클릭 이벤트 상세페이지 이동하기
+const onClickCard = function () {
+  const cards = document.querySelectorAll(".movie-card");
+  cards.forEach((card) => {
+    card.addEventListener("click", function () {
+      const id = this.getAttribute("id");
+      window.location.href = `http://127.0.0.1:5500/infopage.html?id=${id}`; // 상세 페이지로 이동
+    });
+  });
+};
