@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="src/main.js"></script>
+  </head>
+  <body>
+    <!-- Logo -->
+    <nav><- 메인 페이지로 돌아가기</nav>
+    <section>
+      영화
+      <div class="movie-detail">
+        <img
+          src="https://image.tmdb.org/t/p/w300//8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg"
+          class="movie-detail-poster"
+        />
+        <div class="movie-detail-body">
+          <h3 class="detail-title">Spider-Man: Across the Spider-Verse</h3>
+          <p>Rating: 8.8</p>
+          <p>투표횟수: 305</p>
+          <p>
+            After reuniting with Gwen Stacy, Brooklyn’s full-time, friendly
+            neighborhood Spider-Man is catapulted across the Multiverse, where
+            he encounters the Spider Society, a team of Spider-People charged
+            with protecting the Multiverse’s very existence. But when the heroes
+            clash on how to handle a new threat, Miles finds himself pitted
+            against the other Spiders and must set out on his own to save those
+            he loves most."
+          </p>
+        </div>
+      </div>
+    </section>
+    <div class="reviews">
+      리뷰 list
+      <li>리뷰 1</li>
+      <li>리뷰 2</li>
+      <input
+        type="text"
+        id="search-input"
+        placeholder="리뷰를 입력해주세요."
+        autofocus
+      />
+      <button type="submit" id="review-btn">post</button>
+    </div>
+  </body>
+</html>

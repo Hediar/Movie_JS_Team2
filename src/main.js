@@ -1,3 +1,4 @@
+//import {} from "./detail.js";
 
 // movies api
 const loadmovies = async() => {
@@ -5,10 +6,10 @@ const loadmovies = async() => {
         method: 'GET',
         headers: {
           accept: 'application/json',
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NTUyMTcwNGJlYmRlZmIxZmU5YTRiMTg0MGNiYzYxNyIsInN1YiI6IjY0NzU1ZjgwYzI4MjNhMDBhOGQ0OWRhYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.eZnRu1VA2riP3i1VqNMnW4Qqilb-P_EEZjOvjcpOmvQ'
+          Authorization: ''
         }
       };
-    const response = await fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options);
+    const response = await fetch('', options);
     const data = await response.json();
     // console.log(data['results']);
     return data['results'];
@@ -18,7 +19,7 @@ const loadmovies = async() => {
 function displaymovies(movies) {
   const container = document.querySelector(".movie-wrap");
   container.innerHTML = movies.map(movie => createMovieCards(movie)).join('');
-  onClickCard();
+  onClickCard(movies);
 }
 
 // HTML list 만들기
@@ -45,13 +46,15 @@ function createMovieCards(movie){
       return temp_html;
 }
 
-// 클릭 이벤트 alert로 해당 movie id 나오게 만들기 
+// 클릭 이벤트 id에 알맞는 페이지로 이동하기 
 const onClickCard = function() {
   const cards = document.querySelectorAll('.movie-card');
   cards.forEach(card =>{
     card.addEventListener('click', function(){
-      let id = this.getAttribute('id');
-      alert('해당 영화의 id는 ' + id + '입니다.');
+      let id_d = this.getAttribute('id');
+      alert('해당 영화의 id는 ' + id_d + '입니다.');
+      
+      // window.location.href = `/detail.html/${id_d}`; // 페이지 이동 
     });
   })
 };
@@ -69,6 +72,47 @@ const findTitle = function(movies) {
   // console.log(filtermovie);
   displaymovies(filtermovie);
 }
+
+/*detail 페이지를 구성할 HTML*/ 
+
+function createMovieDetail(movie){
+  let temp_html = `
+    <div class="movie-card" id="${movie.id}">
+        <div class="movie">
+          <img
+            src="https://image.tmdb.org/t/p/w300/${movie.poster_path}"
+            class="movie_poster"
+          />
+          <div class="movie_body">
+            <h3 class="movie_title">${movie.original_title}</h3>
+            <p>Rating: ${movie.vote_average}</p>
+          </div>
+          <div class="movie_footer">
+            <p class="movie_overview">
+              ${movie.overview}
+            </p>
+          </div>
+        </div>
+      </div>
+    `;
+  return temp_html;
+}
+
+/*detail HTML */
+
+function displayDetail(movies) {
+  const container = document.querySelector("section");
+  container.innerHTML = movies.map(movie => createMovieCards(movie)).join('');
+  onClickCard(movies);
+}
+
+/* 리뷰 */
+const posting = () => {
+  
+}
+
+/* 메인 페이지로 돌아가는 클릭 이벤트 */
+
 
 // 이벤트 관리
 function setEventListeners(movies) {

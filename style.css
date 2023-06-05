@@ -25,6 +25,7 @@
   body {
     height: 100vh;
     background-color: rgb(23, 21, 21); 
+    color: white;
     
   }
   .title{
@@ -87,3 +88,7 @@
 
   
 
+  .reviews{
+    display: flex;
+    
+  }
