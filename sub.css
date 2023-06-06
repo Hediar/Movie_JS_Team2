@@ -98,14 +98,19 @@ body {
 .comment-edit {
   margin-right: 10px;
 }
+.comment-name {
+  width: 100px;
+  height: 30px;
+  margin: 10px auto;
+}
 .comment-pw {
   width: 100px;
   height: 30px;
   margin: 10px auto;
 }
 /* .edit-box > .comment-pw {
-    display: none;
-  } */
+      display: none;
+    } */
 
 /* 평상시에는 none처리, 수정/삭제버튼 클릭시 display:block 처리되겠끔 하면 됨 */
 
