@@ -95,7 +95,7 @@ const onClickCard = function () {
   cards.forEach((card) => {
     card.addEventListener("click", function () {
       const id = this.getAttribute("id");
-      window.location.href = `http://127.0.0.1:5500/infopage.html?id=${id}`; // 상세 페이지로 이동
+      window.location.href = `http://127.0.0.1:5500/sub.html?id=${id}`; // 상세 페이지로 이동
     });
   });
 };
