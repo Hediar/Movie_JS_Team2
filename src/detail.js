@@ -1,6 +1,6 @@
 /* detail HTML UPDATE & */
 const displayDetail = (data) => {
-    const containerDetail = document.querySelector(".movie-detail");
+    const containerDetail = document.querySelector("#movie-info");
     //console.log(movie);
     let movieDetail = createMovieDetail(data.movie);
     //console.log(movieDetail);
@@ -11,24 +11,20 @@ const displayDetail = (data) => {
   /*detail 페이지를 구성할 HTML*/ 
   
   const createMovieDetail = (movie) => {
-    console.log(movie.poster_path);
+    //console.log(movie.poster_path);
     let detail_html = `
-      <div class="movie-detail">
-          <img
-          src="https://image.tmdb.org/t/p/w300/${movie.poster_path}"
-          class="movie-detail-poster"
-          />
-        <div class="movie-detail-body">
-          <h3 class="detail-title">${movie.original_title}</h3>
-          <p>투표평균: ${movie.vote_average}</p>
-          <p>투표횟수: ${movie.vote_count}</p>
-          <p>인기도: ${movie.popularity}</p>
-          <p>기본 언어: ${movie.original_language}</p>
-          <p>
-          ${movie.overview}
-          </p>
-        </div>
-      </div>
+        <img
+        src="https://image.tmdb.org/t/p/w300/${movie.poster_path}"
+        alt="영화이미지"
+        class="movie-img"
+    />
+    <div class="movie-info">
+        <h4 class="movie-rate">⭐ ${movie.vote_average}</h4>
+        <h2 class="movie-title">${movie.original_title}</h2>
+        <h3 class="movie-desc">
+        ${movie.overview}
+        </h3>
+    </div>
       `;
     return detail_html;
   }
@@ -43,8 +39,8 @@ const posting = () => {
 
 /* 생각해본 데이터 형태 
 {
-  "id": 영화 id,
-  "movie": [
+  "id": 영화 id{
+    "movie": [
     {
       영화 객체
     }
@@ -53,6 +49,7 @@ const posting = () => {
     { 첫번째 리뷰 },
     { 두번째 리뷰 }, ...
   ]
+  }
 }
 */
 

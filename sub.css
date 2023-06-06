@@ -1,0 +1,155 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+  }
+  a {
+    text-decoration: none;
+  }
+  body {
+    width: 100%;
+    min-width: 1000px;
+    background-color: rgb(23, 21, 21);
+  }
+  .title {
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    line-height: 45px;
+    color: white;
+    margin: 50px auto;
+  }
+  .title > a > h1 {
+    font-size: 48px;
+    color: white;
+    padding: 50px 0px 30px;
+  }
+  .inner {
+    width: 60%;
+    background-color: rgb(255, 255, 255);
+    margin: 0px auto 50px;
+    padding: 50px;
+    border-radius: 30px;
+  }
+  #movie-info {
+    display: flex;
+    width: 100%;
+    height: 300px;
+  }
+  .movie-img {
+    display: block;
+  }
+  .movie-info {
+    width: 100%;
+    padding: 0px 30px;
+    margin: 10px auto;
+    overflow: auto;
+  }
+  .movie-info::-webkit-scrollbar {
+    width: 5px;
+    background-color: #eee;
+  }
+  .movie-info::-webkit-scrollbar-thumb {
+    background-color: #999;
+  }
+  .movie-rate {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #999;
+    font-size: 20px;
+  }
+  .movie-title {
+    font-size: 30px;
+    padding: 10px 0;
+  }
+  .movie-desc {
+    padding-top: 10px;
+    border-top: 1px solid #999;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  #review {
+    width: 100%;
+    margin: 50px auto;
+  }
+  .user-review {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 30px 0px;
+  }
+  .review-comment {
+    flex-grow: 1;
+  }
+  .edit-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100px;
+    margin-left: 20px;
+  }
+  .btns {
+    display: flex;
+    width: 100px;
+  }
+  .btns > button {
+    width: 50%;
+    height: 30px;
+  }
+  .comment-edit {
+    margin-right: 10px;
+  }
+  .comment-pw {
+    width: 100px;
+    height: 30px;
+    margin: 10px auto;
+  }
+  /* .edit-box > .comment-pw {
+      display: none;
+    } */
+  
+  /* 평상시에는 none처리, 수정/삭제버튼 클릭시 display:block 처리되겠끔 하면 됨 */
+  
+  .submit {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 30px auto;
+  }
+  #write-comment {
+    flex-grow: 1;
+    margin-right: 20px;
+    font-size: 16px;
+    padding: 10px;
+  }
+  .submit-btns {
+    display: flex;
+    flex-direction: column;
+  }
+  #submit-btn {
+    width: 100px;
+    height: 50px;
+  }
+  
+  /* ------------------------------------------------------------------------------------- */
+  
+  .menu {
+    width: 27%;
+    margin-left: auto;
+  }
+  .menu > ul {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .menu > ul > a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    margin-top: 10px;
+  }
+  
+  .menu > ul > a:hover {
+    color: gray;
+  }
