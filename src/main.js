@@ -57,6 +57,7 @@ function createMovieCards(movie){
 }
 
 // 클릭 이벤트 id에 알맞는 페이지로 이동하기 
+/* TODO: url주소를 해당 환경에 변할 수 있게 만들기 */
 const onClickCard = function(movies) {
   const cards = document.querySelectorAll('.movie-card');
   let id_d;
@@ -80,6 +81,7 @@ const onClickCard = function(movies) {
 
 
 // 검색 기능 : 대소문자 관계없이, enter입력해도 검색 클릭과 동일한 기능
+// TODO : display: none으로 처리해보기 
 const findTitle = function(movies) {
   
   // input값 가져와서 title과 비교하기 
@@ -89,6 +91,7 @@ const findTitle = function(movies) {
   const filtermovie = movies.filter(movie => 
       movie.original_title.toLowerCase().includes(search));
 
+  //console.log(filtermovie);
   displaymovies(filtermovie);
 }
 

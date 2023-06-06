@@ -30,11 +30,17 @@ const displayDetail = (data) => {
   }
   
 /* 리뷰 */
-const posting = () => {
-  
+const posting = (movie) => {
+  const getName = document.querySelector("#comment-id1").value;
+  const getPassword = document.querySelector("#comment-pw1").value;
+  const getComment = document.querySelector("#write-comment").value;
+  console.log(getName, getPassword, getComment);
 }
 
-/* 메인 페이지로 돌아가는 클릭 이벤트 */
+const reviewDisplay = () => {
+
+}
+
 
 
 /* 생각해본 데이터 형태 
@@ -46,7 +52,9 @@ const posting = () => {
     }
   ],
   "reviews": [
-    { 첫번째 리뷰 },
+    { "name" : "",
+        "password": "",
+        "comment": "" },
     { 두번째 리뷰 }, ...
   ]
   }
@@ -58,7 +66,8 @@ window.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get("id"); // 영화 id 출력됨
     let movie = JSON.parse(localStorage.getItem(id));
-    //console.log(id);
-    //console.log(movie);
+
+    console.log(movie);
     displayDetail(movie);
+    posting(movie);
   });

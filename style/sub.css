@@ -98,7 +98,7 @@
   .comment-edit {
     margin-right: 10px;
   }
-  .comment-pw {
+  .comment-pw, .comment-id {
     width: 100px;
     height: 30px;
     margin: 10px auto;

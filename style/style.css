@@ -85,10 +85,11 @@
     border-radius: 10px;
   }
 
-
-  
-
   .reviews{
     display: flex;
     
+  }
+
+  .hidden {
+    display: none;
   }
