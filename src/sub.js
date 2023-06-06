@@ -54,7 +54,7 @@ function displayCardById(movies, id) {
   }
 }
 
-// info
+// sub
 window.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
   const id = urlParams.get("id");
@@ -65,3 +65,39 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 // ----------------------------------------------------------------------------
+
+// 리뷰 저장하기
+const saveComment = () => {
+  const textarea = document.getElementById("write-comment");
+  const password = document.getElementById("comment-pw1");
+  const urlParams = new URLSearchParams(window.location.search);
+
+  const comment = textarea.value;
+  const id = urlParams.get("id"); // 카드의 id 값 가져오기
+  const pw = password.value;
+
+  const commentData = {
+    id: id,
+    password: pw,
+    comment: comment,
+  };
+
+  // 이전에 저장된 댓글 가져오기
+  let comments = localStorage.getItem("Comments");
+  comments = comments ? JSON.parse(comments) : [];
+
+  comments.push(commentData); // 새로운 댓글 추가
+
+  localStorage.setItem("Comments", JSON.stringify(comments)); // 업데이트된 댓글 저장
+
+  alert("리뷰가 저장되었습니다.");
+
+  textarea.value = ""; // 입력값 초기화
+  password.value = "";
+};
+
+// 저장 버튼 클릭 시 이벤트 처리
+window.onload = function () {
+  const saveButton = document.getElementById("submit-btn");
+  saveButton.addEventListener("click", saveComment);
+};
