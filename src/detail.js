@@ -28,12 +28,12 @@ const createMovieDetail = (movie) => {
   return detail_html;
 };
 
+
 window.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
   const id = urlParams.get("id"); // 영화 id 출력됨
   let movie = JSON.parse(localStorage.getItem(id));
-  //console.log(id);
-  //console.log(movie);
+  
   displayDetail(movie);
 });
 
@@ -50,55 +50,84 @@ const posting = () => {
   const pw = password.value;
   const id = urlParams.get("id");
 
-  let movie = localStorage.getItem(id); // 이전에 저장된 movie 데이터 가져오기
-  movie = movie ? JSON.parse(movie) : {};
-
-  // 기존 댓글이 있을 경우에는 배열에 추가, 없을 시 새로운 배열로 추가
-  if (movie.comments) {
-    movie.comments.push({ review, name, pw });
+  // 댓글창 유효성검사
+  if (review.trim() === "") {
+    alert("리뷰를 입력해주세요.");
   } else {
-    movie.comments = [{ review, name, pw }];
+    if (name.trim() === "") {
+      alert("닉네임을 입력해주세요.");
+    } else {
+      if (pw.trim() === "") {
+        alert("비밀번호를 입력해주세요.");
+      } else {
+        let movie = localStorage.getItem(id); // 이전에 저장된 movie 데이터 가져오기
+        movie = movie ? JSON.parse(movie) : {};
+
+        // 기존 댓글이 있을 경우에는 배열에 추가, 없을 시 새로운 배열로 추가
+        if (movie.comments) {
+          movie.comments.push({ review, name, pw });
+        } else {
+          movie.comments = [{ review, name, pw }];
+        }
+        localStorage.setItem(id, JSON.stringify(movie));
+
+        alert("리뷰가 저장되었습니다.");
+
+        textarea.value = ""; // 입력값 초기화
+        password.value = "";
+        writer.value = "";
+
+        location.reload();
+      }
+    }
   }
-  localStorage.setItem(id, JSON.stringify(movie));
+};
 
-  alert("리뷰가 저장되었습니다.");
+const updateReview = () => {
 
-  textarea.value = ""; // 입력값 초기화
-  password.value = "";
-  writer.value = "";
+};
+
+const deleteReview = () => {
+
 };
 
 // --------------------------------------------------------------------------------------------------------------
 
-// const displayComments = () => {
-//   // 이전에 저장된 댓글 가져오기
-//   const urlParams = new URLSearchParams(window.location.search);
-//   const id = urlParams.get("id");
+const displayComments = () => {
+  // 이전에 저장된 댓글 가져오기
+  const urlParams = new URLSearchParams(window.location.search);
+  const id = urlParams.get("id");
 
-//   let movie = localStorage.getItem(id); // 이전에 저장된 movie 데이터 가져오기
-//   movie = movie ? JSON.parse(movie) : {};
+  let movie = localStorage.getItem(id); // 이전에 저장된 movie 데이터 가져오기
+  movie = movie ? JSON.parse(movie) : {};
 
-//   // 리뷰들을 가져오기 위해 movie 객체 내의 review 배열을 참조합니다.
-//   const reviews = movie.review || [];
+  // 리뷰들을 가져오기 위해 movie 객체 내의 review 배열을 참조합니다.
+  const comments = movie.comments || [];
 
-//   // 댓글을 표시할 HTML 요소 선택
-//   const reviewContainer = document.getElementById("review-comment");
+  // 댓글을 표시할 HTML 요소 선택
+  const reviewContainer = document.getElementById("review-comment");
 
-//   // 댓글 템플릿 생성
-//   const commentsHTML = reviews.map((review) => {
-//     return `
-//     <p class="review-comment" id="review-comment">${review}</p>
-//     `;
-//   });
+  // 댓글 템플릿 생성
+  const commentsHTML = comments.map((comments) => {
+    return `
+    <p><strong>${comments.name}</strong></p>
+    <p class="review-comment" id="review-comment">${comments.review}</p>
+    `;
+  });
+  
+  // 댓글을 HTML에 삽입
+  reviewContainer.innerHTML = commentsHTML.join("");
+  // location.reload()
+};
 
-//   // 댓글을 HTML에 삽입
-//   reviewContainer.innerHTML = commentsHTML.join("");
-// };
-
-// // 페이지 로드 시 댓글 표시
-// window.onload = function () {
-//   displayComments();
-// };
+window.onload = function () {
+  const saveButton = document.getElementById("submit-btn");
+  saveButton.addEventListener("click", () =>{
+    posting();
+    location.reload();
+  });
+  displayComments();
+};
 
 // ---------------------------------------------------------------------------------------------------------------
 // 1. 리뷰 저장
