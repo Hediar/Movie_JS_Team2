@@ -51,13 +51,13 @@ const posting = () => {
   const id = urlParams.get("id");
 
   // 댓글창 유효성검사
-  if (review.length === 0) {
+  if (review.trim() === "") {
     alert("리뷰를 입력해주세요.");
   } else {
-    if (name.length === 0) {
+    if (name.trim() === "") {
       alert("닉네임을 입력해주세요.");
     } else {
-      if (pw.length === 0) {
+      if (pw.trim() === "") {
         alert("비밀번호를 입력해주세요.");
       } else {
         let movie = localStorage.getItem(id); // 이전에 저장된 movie 데이터 가져오기
