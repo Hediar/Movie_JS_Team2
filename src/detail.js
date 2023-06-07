@@ -98,14 +98,20 @@ const displayComments = () => {
   const comments = movie.comments || [];
 
   // 댓글을 표시할 HTML 요소 선택
-  const reviewContainer = document.getElementById("review-comment");
+  const reviewContainer = document.getElementById("review");
 
   // 댓글 템플릿 생성
   const commentsHTML = comments.map((comments) => {
     return `
-    <p class="review-comment" id="review-comment">${comments.review}</p>
-    <button class="delete-btn" data-index="${comments.id}">수정</button>
-    <button class="delete-btn" data-index="${comments.id}">삭제</button>
+    <div class="user-review">
+          <p class="review-comment" id="review-comment">${comments.review}</p>
+          <div class="edit-box">
+            <div class="btns">
+              <button class="comment-edit">수정</button>
+              <button class="comment-delete">삭제</button>
+            </div>
+          </div>
+        </div>
     `;
   });
 
