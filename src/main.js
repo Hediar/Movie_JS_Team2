@@ -1,14 +1,14 @@
-
+import * as apikey from "./apikey.js";
 // movies api
 const loadmovies = async() => {
     const options = {
         method: 'GET',
         headers: {
           accept: 'application/json',
-          Authorization: '',
+          Authorization: apikey.aut,
         }
       };
-    const response = await fetch('', options);
+    const response = await fetch(apikey.apiUrl, options);
     const data = await response.json();
     //console.log(data['results']);
     return data['results'];

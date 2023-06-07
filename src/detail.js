@@ -61,6 +61,13 @@ const reviewDisplay = () => {
 }
 */
 
+const onClickSave = function() {
+    
+}
+
+const setEventListeners = function() {
+
+}
 
 window.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);
