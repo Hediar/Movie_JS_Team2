@@ -10,11 +10,12 @@
   </head>
   <body>
     <!-- Logo -->
-    <header class="title">
-      <h1>영화 컬렉션</h1>
+    <header></header>
+    <section class="title">
+      <h1>Top Rated Movies</h1>
+      <label>Search Movie by its title </label>
       <form class="search">
         <!--  onsubmit="handleSearch(event)" -->
-        <label>영화 검색 </label>
         <input
           type="text"
           id="search-input"
@@ -23,7 +24,13 @@
         />
         <button type="submit" id="search-btn">검색</button>
       </form>
-    </header>
+    </section>
+    <div id="filter-menu">
+      <button class="filter-title">제목▼</button>
+      <button class="filter-rate">평점▼</button>
+      <button class="filter-vote">투표수▼</button>
+    </div>
+    <!-- 오름차/내림차순서로 변경됨에 따라 ▼ ▲ 가 변경되겠끔 하면 될 것 같습니다! -->
     <section class="movie-wrap"></section>
   </body>
 </html>
