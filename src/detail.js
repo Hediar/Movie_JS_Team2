@@ -5,8 +5,17 @@ const displayDetail = (data) => {
   let movieDetail = createMovieDetail(data.movie);
   //console.log(movieDetail);
   containerDetail.innerHTML = movieDetail;
+  changeBackground(data.movie);
 };
 
+function changeBackground(movie) {
+  let bg = document.getElementById("background");
+  // console.log(movie);
+  // console.log(movie.backdrop_path);
+  let backdrop = movie.backdrop_path;
+  console.log(backdrop);
+  bg.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 25%), rgba(0, 0, 0, 100%)),url(https://image.tmdb.org/t/p/original/${backdrop}`;
+}
 /*detail 페이지를 구성할 HTML*/
 
 const createMovieDetail = (movie) => {
@@ -14,7 +23,7 @@ const createMovieDetail = (movie) => {
   // movie.orginal_title -> movie.title
   let detail_html = `
         <img
-        src="https://image.tmdb.org/t/p/w300/${movie.poster_path}"
+        src="https://image.tmdb.org/t/p/w400/${movie.poster_path}"
         alt="영화이미지"
         class="movie-img"
     />
