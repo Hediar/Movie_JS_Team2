@@ -38,12 +38,12 @@ const createMovieDetail = (movie) => {
   return detail_html;
 };
 
+
 window.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
   const id = urlParams.get("id"); // 영화 id 출력됨
   let movie = JSON.parse(localStorage.getItem(id));
-  //console.log(id);
-  //console.log(movie);
+  
   displayDetail(movie);
 });
 
@@ -61,13 +61,14 @@ const posting = () => {
   const id = urlParams.get("id");
 
   // 댓글창 유효성검사
-  if (review.length === 0) {
+
+  if (review.trim() === "") {
     alert("리뷰를 입력해주세요.");
   } else {
-    if (name.length === 0) {
+    if (name.trim() === "") {
       alert("닉네임을 입력해주세요.");
     } else {
-      if (pw.length === 0) {
+      if (pw.trim() === "") {
         alert("비밀번호를 입력해주세요.");
       } else {
         let movie = localStorage.getItem(id); // 이전에 저장된 movie 데이터 가져오기
@@ -87,7 +88,6 @@ const posting = () => {
         password.value = "";
         writer.value = "";
 
-        location.reload();
       }
     }
   }
@@ -132,6 +132,7 @@ window.onload = function () {
   const saveButton = document.getElementById("submit-btn");
   saveButton.addEventListener("click", () => {
     posting();
+    location.reload();
   });
   displayComments();
 };
@@ -159,3 +160,26 @@ window.onload = function () {
 
 //   displayComments();
 // };
+
+
+const updateReview = () => {
+
+};
+
+const deleteReview = () => {
+
+};
+
+
+
+// ---------------------------------------------------------------------------------------------------------------
+// 1. 리뷰 저장
+//     1. id를 key으로 저장되어 있던 데이터에 review 배열 추가
+//        객체 불러오기-> 객체에 value 추가 -> 객체 저장
+
+//         1. 기존에 배열이 있을 시 배열에 객체 추가, 기존 배열 없을 시 배열 추가
+//         2. 입력값 없을 시 유효성 검사
+//         3. 저장 후 input 값 없애기
+// 2. 리뷰 불러오기
+//     1. card id 와 비교하여 일치하는 key 내의 review 배열 내의 객체를 listing
+
