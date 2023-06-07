@@ -29,7 +29,7 @@ body {
   background-image: linear-gradient(rgba(0, 0, 0, 25%), rgba(0, 0, 0, 100%)),
     url(https://image.tmdb.org/t/p/original/q719jXXEzOoYaps6babgKnONONX.jpg);
 
-  /* 페이지에서 movie.poster_path 번호를 받아와서 이미지 변경할 수 있도록. */
+  /* 페이지에서 movie.poster_path 번호를 받아와서 이미지 변경할 수 있도록 */
 
   background-repeat: no-repeat;
   background-position: top;
@@ -41,17 +41,21 @@ body {
 header {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
   width: 60%;
-  height: 200px;
+  height: 600px;
   margin: 0 auto;
   color: #fff;
 }
-/* 
+
 header > h1 {
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 250px;
+  font-family: "Newsreader", serif;
+  font-size: 80px;
   text-align: center;
-  margin-bottom: 70px;
-} */
+}
 header > a {
   margin-bottom: 20px;
   font-size: 16px;
@@ -71,7 +75,7 @@ header > a {
 .inner {
   width: 60%;
   background-color: rgb(255, 255, 255);
-  margin: 0px auto 100px;
+  margin: 0px auto 600px;
   padding: 50px;
   border-radius: 30px;
   z-index: 99;
@@ -124,12 +128,18 @@ header > a {
 #review {
   width: 100%;
   margin: 50px auto;
+  padding-top: 20px;
+  border-top: 1px solid #ebebeb;
 }
 .user-review {
   display: flex;
   justify-content: space-between;
   width: 100%;
   margin: 30px 0px;
+}
+.writer {
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 .review-comment {
   flex-grow: 1;
@@ -209,29 +219,3 @@ header > a {
   width: 100px;
   height: 50px;
 }
-
-/* ------------------------------------------------------------------------------------- */
-
-.menu {
-  width: 27%;
-  margin-left: auto;
-}
-.menu > ul {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.menu > ul > a {
-  text-decoration: none;
-  color: white;
-  font-size: 20px;
-  margin-top: 10px;
-}
-
-.menu > ul > a:hover {
-  color: gray;
-}
-
-
