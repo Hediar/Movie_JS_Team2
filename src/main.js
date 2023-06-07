@@ -22,37 +22,32 @@ function displaymovies(movies) {
   onClickCard(movies);
 }
 
-// 영화 데이터 로컬에 저장 
-const movieData = function(movies) {
-  if(localStorage === null){
-    movies.forEach(movie =>{
-      const mData = JSON.stringify({movie})
-      //console.log(mData);
+
+// 영화 데이터 로컬에 저장
+const movieData = function (movies) {
+  if (localStorage === null) {
+    movies.forEach((movie) => {
+      const mData = JSON.stringify({ movie });
       localStorage.setItem(movie.id, mData)
     });
   }
 };
 
 // HTML list 만들기
-function createMovieCards(movie){
-      let temp_html = `
-        <div class="movie-card" id="${movie.id}">
-            <div class="movie">
-              <img
-                src="https://image.tmdb.org/t/p/w300/${movie.poster_path}"
-                class="movie_poster"
-              />
-              <div class="movie_body">
-                <h3 class="movie_title">${movie.original_title}</h3>
-                <p>Rating: ${movie.vote_average}</p>
-              </div>
-              <div class="movie_footer">
-                <p class="movie_overview">
-                  ${movie.overview}
-                </p>
-              </div>
-            </div>
-          </div>
+
+function createMovieCards(movie) {
+  let temp_html = `
+  <div class="movie-card" id="${movie.id}">
+  <img
+    src="https://image.tmdb.org/t/p/w400/${movie.poster_path}"
+    class="movie_poster"
+  />
+    <h3 class="movie_title">${movie.title}</h3>
+    <p class="movie_overview">
+      ${movie.overview}
+    </p>
+    <p class="movie_rate">${movie.vote_average}⭐(${movie.vote_count})</p>
+</div>
         `;
       return temp_html;
 }
@@ -70,6 +65,7 @@ const onClickCard = function(movies) {
 
       detail_id = movies.find(movie => movie.id.toString() === id_d);
       window.location.href = `http://127.0.0.1:5501/detail.html?id=${id_d}`; // 페이지 이동 
+      
       //console.log(detail_id);
 
       /* 해당 id에 맞는 객체 배열을 저장한다. 
@@ -88,8 +84,9 @@ const findTitle = function(movies) {
   // input값 가져와서 title과 비교하기 
   let search = document.getElementById("search-input").value.toLowerCase();
   
-  // 버튼 클릭이나 엔터 키 입력되었을 때 실행 
-  if(search.length <= 0){
+  // 버튼 클릭이나 엔터 키 입력되었을 때 실행
+  // 검색 유효성 검사
+  if (search.length <= 0) {
     alert("검색어를 입력해주세요.");
   } else {
     const filtermovie = movies.filter((movie) =>
@@ -102,12 +99,7 @@ const findTitle = function(movies) {
       displaymovies(filtermovie);
     }
   }
-  
-
-  //console.log(filtermovie);
-  displaymovies(filtermovie);
-}
-
+};
 
 // 이벤트 관리
 function setEventListeners(movies) {
@@ -129,5 +121,64 @@ loadmovies().then((movies) => {
   movieData(movies);
   displaymovies(movies);
   setEventListeners(movies);
+  orderByTitle(movies);
+  orderByRate(movies);
+  orderByVote(movies);
 });
+
+// 알파벳 순서에 따른 정렬 함수
+function orderByTitle(movies) {
+  const element = document.getElementById("filter-title");
+  element.addEventListener("click", function () {
+    const lastChar = element.textContent.charAt(element.textContent.length - 1);
+    movies.sort(function (a, b) {
+      if (a.title && b.title) {
+        return lastChar === "▼"
+          ? a.title.localeCompare(b.title)
+          : b.title.localeCompare(a.title);
+      }
+      return 0;
+    });
+    displaymovies(movies);
+    changeArrow(element);
+  });
+}
+
+// 평점에 따른 정렬 함수
+function orderByRate(movies) {
+  const element = document.getElementById("filter-rate");
+  element.addEventListener("click", function () {
+    const lastChar = element.textContent.charAt(element.textContent.length - 1);
+    movies.sort(function (a, b) {
+      return lastChar === "▼"
+        ? a.vote_average - b.vote_average
+        : b.vote_average - a.vote_average;
+    });
+    displaymovies(movies);
+    changeArrow(element);
+  });
+}
+// 투표수에 따른 정렬 함수
+function orderByVote(movies) {
+  const element = document.getElementById("filter-vote");
+  element.addEventListener("click", function () {
+    const lastChar = element.textContent.charAt(element.textContent.length - 1);
+    movies.sort(function (a, b) {
+      return lastChar === "▼"
+        ? a.vote_count - b.vote_count
+        : b.vote_count - a.vote_count;
+    });
+    displaymovies(movies);
+    changeArrow(element);
+  });
+}
+
+function changeArrow(element) {
+  const lastChar = element.textContent.charAt(element.textContent.length - 1);
+  const newStr =
+    lastChar === "▼"
+      ? element.textContent.slice(0, -1) + "▲"
+      : element.textContent.slice(0, -1) + "▼";
+  element.textContent = newStr;
+}
 
