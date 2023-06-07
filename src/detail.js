@@ -25,6 +25,8 @@ const createMovieDetail = (movie) => {
         </h3>
     </div>
       `;
+  // img 백그라운드를 이미지 id에 맞춰서 css 변경하는 방법... 알고 싶어요
+
   return detail_html;
 };
 
