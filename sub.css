@@ -98,11 +98,7 @@ body {
 .comment-edit {
   margin-right: 10px;
 }
-.comment-name {
-  width: 100px;
-  height: 30px;
-  margin: 10px auto;
-}
+
 .comment-pw {
   width: 100px;
   height: 30px;
@@ -129,6 +125,11 @@ body {
 .submit-btns {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+.comment-name {
+  width: 100px;
+  height: 30px;
 }
 #submit-btn {
   width: 100px;
