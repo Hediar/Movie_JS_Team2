@@ -80,7 +80,7 @@ const findTitle = function (movies) {
 
   // 버튼 클릭이나 엔터 키 입력되었을 때 실행
   const filtermovie = movies.filter((movie) =>
-    movie.original_title.toLowerCase().includes(search)
+    movie.title.toLowerCase().includes(search)
   );
 
   displaymovies(filtermovie);
