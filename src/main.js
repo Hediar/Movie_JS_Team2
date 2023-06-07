@@ -26,7 +26,7 @@ function displaymovies(movies) {
 
 // 영화 데이터 로컬에 저장
 const movieData = function (movies) {
-  if (localStorage !== null) {
+  if (localStorage === null) {
     movies.forEach((movie) => {
       const mData = JSON.stringify({ movie });
       //console.log(mData);
@@ -38,23 +38,17 @@ const movieData = function (movies) {
 // HTML list 만들기
 function createMovieCards(movie) {
   let temp_html = `
-        <div class="movie-card" id="${movie.id}">
-            <div class="movie">
-              <img
-                src="https://image.tmdb.org/t/p/w300/${movie.poster_path}"
-                class="movie_poster"
-              />
-              <div class="movie_body">
-                <h3 class="movie_title">${movie.title}</h3>
-                <p>Rating: ${movie.vote_average}</p>
-              </div>
-              <div class="movie_footer">
-                <p class="movie_overview">
-                  ${movie.overview}
-                </p>
-              </div>
-            </div>
-          </div>
+  <div class="movie-card" id="${movie.id}">
+  <img
+    src="https://image.tmdb.org/t/p/w400/${movie.poster_path}"
+    class="movie_poster"
+  />
+    <h3 class="movie_title">${movie.title}</h3>
+    <p class="movie_overview">
+      ${movie.overview}
+    </p>
+    <p class="movie_rate">${movie.vote_average}⭐</p>
+</div>
         `;
   return temp_html;
 }
