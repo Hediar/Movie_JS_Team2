@@ -47,7 +47,7 @@ function createMovieCards(movie) {
     <p class="movie_overview">
       ${movie.overview}
     </p>
-    <p class="movie_rate">${movie.vote_average}⭐</p>
+    <p class="movie_rate">${movie.vote_average}⭐(${movie.vote_count})</p>
 </div>
         `;
   return temp_html;
@@ -110,4 +110,62 @@ loadmovies().then((movies) => {
   movieData(movies);
   displaymovies(movies);
   setEventListeners(movies);
+  orderByTitle(movies);
+  orderByRate(movies);
+  orderByVote(movies);
 });
+// 알파벳 순서에 따른 정렬 함수
+function orderByTitle(movies) {
+  const element = document.getElementById("filter-title");
+  element.addEventListener("click", function () {
+    const lastChar = element.textContent.charAt(element.textContent.length - 1);
+    movies.sort(function (a, b) {
+      if (a.title && b.title) {
+        return lastChar === "▼"
+          ? a.title.localeCompare(b.title)
+          : b.title.localeCompare(a.title);
+      }
+      return 0;
+    });
+    displaymovies(movies);
+    changeArrow(element);
+  });
+}
+
+// 평점에 따른 정렬 함수
+function orderByRate(movies) {
+  const element = document.getElementById("filter-rate");
+  element.addEventListener("click", function () {
+    const lastChar = element.textContent.charAt(element.textContent.length - 1);
+    movies.sort(function (a, b) {
+      return lastChar === "▼"
+        ? a.vote_average - b.vote_average
+        : b.vote_average - a.vote_average;
+    });
+    displaymovies(movies);
+    changeArrow(element);
+  });
+}
+// 투표수에 따른 정렬 함수
+function orderByVote(movies) {
+  const element = document.getElementById("filter-vote");
+  element.addEventListener("click", function () {
+    const lastChar = element.textContent.charAt(element.textContent.length - 1);
+    movies.sort(function (a, b) {
+      return lastChar === "▼"
+        ? a.vote_count - b.vote_count
+        : b.vote_count - a.vote_count;
+    });
+    displaymovies(movies);
+    changeArrow(element);
+  });
+}
+
+function changeArrow(element) {
+  const lastChar = element.textContent.charAt(element.textContent.length - 1);
+  const newStr =
+    lastChar === "▼"
+      ? element.textContent.slice(0, -1) + "▲"
+      : element.textContent.slice(0, -1) + "▼";
+  element.textContent = newStr;
+}
