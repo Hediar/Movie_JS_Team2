@@ -11,6 +11,7 @@ const displayDetail = (data) => {
 
 const createMovieDetail = (movie) => {
   //console.log(movie.poster_path);
+  // movie.orginal_title -> movie.title
   let detail_html = `
         <img
         src="https://image.tmdb.org/t/p/w300/${movie.poster_path}"
@@ -19,7 +20,7 @@ const createMovieDetail = (movie) => {
     />
     <div class="movie-info">
         <h4 class="movie-rate">⭐ ${movie.vote_average}</h4>
-        <h2 class="movie-title">${movie.original_title}</h2>
+        <h2 class="movie-title">${movie.title}</h2>
         <h3 class="movie-desc">
         ${movie.overview}
         </h3>
@@ -50,22 +51,37 @@ const posting = () => {
   const pw = password.value;
   const id = urlParams.get("id");
 
-  let movie = localStorage.getItem(id); // 이전에 저장된 movie 데이터 가져오기
-  movie = movie ? JSON.parse(movie) : {};
-
-  // 기존 댓글이 있을 경우에는 배열에 추가, 없을 시 새로운 배열로 추가
-  if (movie.comments) {
-    movie.comments.push({ review, name, pw });
+  // 댓글창 유효성검사
+  if (review.length === 0) {
+    alert("리뷰를 입력해주세요.");
   } else {
-    movie.comments = [{ review, name, pw }];
+    if (name.length === 0) {
+      alert("닉네임을 입력해주세요.");
+    } else {
+      if (pw.length === 0) {
+        alert("비밀번호를 입력해주세요.");
+      } else {
+        let movie = localStorage.getItem(id); // 이전에 저장된 movie 데이터 가져오기
+        movie = movie ? JSON.parse(movie) : {};
+
+        // 기존 댓글이 있을 경우에는 배열에 추가, 없을 시 새로운 배열로 추가
+        if (movie.comments) {
+          movie.comments.push({ review, name, pw });
+        } else {
+          movie.comments = [{ review, name, pw }];
+        }
+        localStorage.setItem(id, JSON.stringify(movie));
+
+        alert("리뷰가 저장되었습니다.");
+
+        textarea.value = ""; // 입력값 초기화
+        password.value = "";
+        writer.value = "";
+
+        location.reload();
+      }
+    }
   }
-  localStorage.setItem(id, JSON.stringify(movie));
-
-  alert("리뷰가 저장되었습니다.");
-
-  textarea.value = ""; // 입력값 초기화
-  password.value = "";
-  writer.value = "";
 };
 
 // --------------------------------------------------------------------------------------------------------------
@@ -88,6 +104,8 @@ const displayComments = () => {
   const commentsHTML = comments.map((comments) => {
     return `
     <p class="review-comment" id="review-comment">${comments.review}</p>
+    <button class="delete-btn" data-index="${comments.id}">수정</button>
+    <button class="delete-btn" data-index="${comments.id}">삭제</button>
     `;
   });
 
@@ -99,18 +117,30 @@ window.onload = function () {
   const saveButton = document.getElementById("submit-btn");
   saveButton.addEventListener("click", () => {
     posting();
-    location.reload();
   });
   displayComments();
 };
 
-// ---------------------------------------------------------------------------------------------------------------
-// 1. 리뷰 저장
-//     1. id를 key으로 저장되어 있던 데이터에 review 배열 추가
-//        객체 불러오기-> 객체에 value 추가 -> 객체 저장
+// const deleteButtons = document.querySelectorAll(".delete-btn");
+// deleteButtons.forEach((button) => {
+//   button.addEventListener("click", () => {
+//     const index = button.dataset.index;
+//     deleteComment(index);
+//   });
+// });
 
-//         1. 기존에 배열이 있을 시 배열에 객체 추가, 기존 배열 없을 시 배열 추가
-//         2. 입력값 없을 시 유효성 검사
-//         3. 저장 후 input 값 없애기
-// 2. 리뷰 불러오기
-//     1. card id 와 비교하여 일치하는 key 내의 review 배열 내의 객체를 listing
+// const deleteComment = (id) => {
+//   const urlParams = new URLSearchParams(window.location.search);
+//   const id = urlParams.get("id");
+
+//   let movie = localStorage.getItem(id);
+//   movie = movie ? JSON.parse(movie) : {};
+
+//   const comments = movie.comments || [];
+//   comments.splice(index, 1);
+
+//   movie.comments = comments;
+//   localStorage.setItem(id, JSON.stringify(movie));
+
+//   displayComments();
+// };
