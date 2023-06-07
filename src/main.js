@@ -45,7 +45,7 @@ function createMovieCards(movie) {
                 class="movie_poster"
               />
               <div class="movie_body">
-                <h3 class="movie_title">${movie.original_title}</h3>
+                <h3 class="movie_title">${movie.title}</h3>
                 <p>Rating: ${movie.vote_average}</p>
               </div>
               <div class="movie_footer">
@@ -70,7 +70,7 @@ const onClickCard = function (movies) {
       //alert('해당 영화의 id는 ' + id_d + '입니다.');
 
       detail_id = movies.find((movie) => movie.id.toString() === id_d);
-      window.location.href = `http://127.0.0.1:5501/detail.html?id=${id_d}`; // 페이지 이동
+      window.location.href = `http://127.0.0.1:5500/detail.html?id=${id_d}`; // 페이지 이동
       //console.log(detail_id);
 
       /* 해당 id에 맞는 객체 배열을 저장한다. 
@@ -85,11 +85,20 @@ const findTitle = function (movies) {
   let search = document.getElementById("search-input").value.toLowerCase();
 
   // 버튼 클릭이나 엔터 키 입력되었을 때 실행
-  const filtermovie = movies.filter((movie) =>
-    movie.original_title.toLowerCase().includes(search)
-  );
+  // 검색 유효성 검사
+  if (search.length <= 0) {
+    alert("검색어를 입력해주세요.");
+  } else {
+    const filtermovie = movies.filter((movie) =>
+      movie.title.toLowerCase().includes(search)
+    );
 
-  displaymovies(filtermovie);
+    if (filtermovie.length === 0) {
+      alert("검색어에 해당하는 영화가 없습니다.");
+    } else {
+      displaymovies(filtermovie);
+    }
+  }
 };
 
 // 이벤트 관리
