@@ -29,7 +29,7 @@ body {
   background-image: linear-gradient(rgba(0, 0, 0, 25%), rgba(0, 0, 0, 100%)),
     url(https://image.tmdb.org/t/p/original/q719jXXEzOoYaps6babgKnONONX.jpg);
 
-  /* 페이지에서 movie.poster_path 번호를 받아와서 이미지 변경할 수 있도록 */
+  /* 페이지에서 movie.poster_path 번호를 받아와서 이미지 변경할 수 있도록. */
 
   background-repeat: no-repeat;
   background-position: top;
