@@ -102,6 +102,9 @@ function setEventListeners(movies) {
   });
 }
 
+window.displayMovies = displaymovies;
+window.movieData = movieData;
+
 // main
 loadmovies().then((movies) => {
   movieData(movies);
