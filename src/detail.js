@@ -1,11 +1,21 @@
 /* detail HTML UPDATE & */
 const displayDetail = (data) => {
   const containerDetail = document.querySelector("#movie-info");
-  //console.log(movie);
   let movieDetail = createMovieDetail(data.movie);
-  //console.log(movieDetail);
+  // console.log(movieDetail);
   containerDetail.innerHTML = movieDetail;
+  // console.log(data.movie);
+  changeBackground(data.movie);
 };
+
+function changeBackground(movie) {
+  let bg = document.getElementById("background");
+  // console.log(movie);
+  // console.log(movie.backdrop_path);
+  let backdrop = movie.backdrop_path;
+  console.log(backdrop);
+  bg.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 25%), rgba(0, 0, 0, 100%)),url(https://image.tmdb.org/t/p/original/${backdrop}`;
+}
 
 /*detail 페이지를 구성할 HTML*/
 
@@ -13,7 +23,7 @@ const createMovieDetail = (movie) => {
   //console.log(movie.poster_path);
   let detail_html = `
         <img
-        src="https://image.tmdb.org/t/p/w300/${movie.poster_path}"
+        src="https://image.tmdb.org/t/p/w400/${movie.poster_path}"
         alt="영화이미지"
         class="movie-img"
     />
@@ -25,8 +35,6 @@ const createMovieDetail = (movie) => {
         </h3>
     </div>
       `;
-  // img 백그라운드를 이미지 id에 맞춰서 css 변경하는 방법... 알고 싶어요
-
   return detail_html;
 };
 
@@ -56,7 +64,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const id = urlParams.get("id"); // 영화 id 출력됨
   let movie = JSON.parse(localStorage.getItem(id));
   //console.log(id);
-  //console.log(movie);
+  // console.log(movie);
   displayDetail(movie);
 });
 

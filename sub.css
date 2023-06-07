@@ -26,8 +26,8 @@ body {
   width: 100%;
   height: 60%;
   background: #000;
-  background-image: linear-gradient(rgba(0, 0, 0, 25%), rgba(0, 0, 0, 100%));
-  /* url(https://image.tmdb.org/t/p/original/q719jXXEzOoYaps6babgKnONONX.jpg); */
+  background-image: linear-gradient(rgba(0, 0, 0, 25%), rgba(0, 0, 0, 100%)),
+    url(https://image.tmdb.org/t/p/original/q719jXXEzOoYaps6babgKnONONX.jpg);
 
   /* 페이지에서 movie.poster_path 번호를 받아와서 이미지 변경할 수 있도록 */
 
