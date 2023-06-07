@@ -39,21 +39,15 @@ const movieData = function (movies) {
 function createMovieCards(movie) {
   let temp_html = `
         <div class="movie-card" id="${movie.id}">
-            <div class="movie">
               <img
-                src="https://image.tmdb.org/t/p/w300/${movie.poster_path}"
+                src="https://image.tmdb.org/t/p/w400/${movie.poster_path}"
                 class="movie_poster"
               />
-              <div class="movie_body">
                 <h3 class="movie_title">${movie.original_title}</h3>
-                <p>Rating: ${movie.vote_average}</p>
-              </div>
-              <div class="movie_footer">
                 <p class="movie_overview">
                   ${movie.overview}
                 </p>
-              </div>
-            </div>
+                <p class="movie_rate">${movie.vote_average}⭐</p>
           </div>
         `;
   return temp_html;
