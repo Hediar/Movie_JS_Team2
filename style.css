@@ -163,3 +163,12 @@ header {
   font-weight: 700;
   text-align: right;
 }
+
+.h1-clock {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px; /* 요소의 너비를 지정해주세요 */
+  height: 100px; /* 요소의 높이를 지정해주세요 */
+  margin: 50px 50px;
+}
