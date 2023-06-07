@@ -77,7 +77,7 @@ const posting = () => {
         password.value = "";
         writer.value = "";
 
-        location.reload();
+        //location.reload();
       }
     }
   }
