@@ -88,8 +88,20 @@ const findTitle = function(movies) {
   let search = document.getElementById("search-input").value.toLowerCase();
   
   // 버튼 클릭이나 엔터 키 입력되었을 때 실행 
-  const filtermovie = movies.filter(movie => 
-      movie.original_title.toLowerCase().includes(search));
+  if(search.length <= 0){
+    alert("검색어를 입력해주세요.");
+  } else {
+    const filtermovie = movies.filter((movie) =>
+      movie.title.toLowerCase().includes(search)
+    );
+
+    if (filtermovie.length === 0) {
+      alert("검색어에 해당하는 영화가 없습니다.");
+    } else {
+      displaymovies(filtermovie);
+    }
+  }
+  
 
   //console.log(filtermovie);
   displaymovies(filtermovie);

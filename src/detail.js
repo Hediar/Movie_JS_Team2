@@ -50,31 +50,45 @@ const posting = () => {
   const pw = password.value;
   const id = urlParams.get("id");
 
-  let movie = localStorage.getItem(id); // 이전에 저장된 movie 데이터 가져오기
-  movie = movie ? JSON.parse(movie) : {};
-
-  /* 작성자 or 비밀번호 or 코멘트가 없을 경우 */
-  if (name === ""){
-
-  } else if (pw === ""){
-
-  } else if (review === ""){
-
-  }
-
-  // 기존 댓글이 있을 경우에는 배열에 추가, 없을 시 새로운 배열로 추가
-  if (movie.comments) {
-    movie.comments.push({ review, name, pw });
+  // 댓글창 유효성검사
+  if (review.length === 0) {
+    alert("리뷰를 입력해주세요.");
   } else {
-    movie.comments = [{ review, name, pw }];
+    if (name.length === 0) {
+      alert("닉네임을 입력해주세요.");
+    } else {
+      if (pw.length === 0) {
+        alert("비밀번호를 입력해주세요.");
+      } else {
+        let movie = localStorage.getItem(id); // 이전에 저장된 movie 데이터 가져오기
+        movie = movie ? JSON.parse(movie) : {};
+
+        // 기존 댓글이 있을 경우에는 배열에 추가, 없을 시 새로운 배열로 추가
+        if (movie.comments) {
+          movie.comments.push({ review, name, pw });
+        } else {
+          movie.comments = [{ review, name, pw }];
+        }
+        localStorage.setItem(id, JSON.stringify(movie));
+
+        alert("리뷰가 저장되었습니다.");
+
+        textarea.value = ""; // 입력값 초기화
+        password.value = "";
+        writer.value = "";
+
+        location.reload();
+      }
+    }
   }
-  localStorage.setItem(id, JSON.stringify(movie));
+};
 
-  alert("리뷰가 저장되었습니다.");
+const updateReview = () => {
 
-  textarea.value = ""; // 입력값 초기화
-  password.value = "";
-  writer.value = "";
+};
+
+const deleteReview = () => {
+
 };
 
 // --------------------------------------------------------------------------------------------------------------
@@ -96,6 +110,7 @@ const displayComments = () => {
   // 댓글 템플릿 생성
   const commentsHTML = comments.map((comments) => {
     return `
+    <p><strong>${comments.name}</strong></p>
     <p class="review-comment" id="review-comment">${comments.review}</p>
     `;
   });
