@@ -28,27 +28,6 @@ const createMovieDetail = (movie) => {
   return detail_html;
 };
 
-// /* 리뷰 */
-// const posting = () => {};
-
-// /* 메인 페이지로 돌아가는 클릭 이벤트 */
-
-// /* 생각해본 데이터 형태
-// {
-//   "id": 영화 id{
-//     "movie": [
-//     {
-//       영화 객체
-//     }
-//   ],
-//   "reviews": [
-//     { 첫번째 리뷰 },
-//     { 두번째 리뷰 }, ...
-//   ]
-//   }
-// }
-// */
-
 window.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
   const id = urlParams.get("id"); // 영화 id 출력됨
@@ -71,10 +50,10 @@ const posting = () => {
   const pw = password.value;
   const id = urlParams.get("id");
 
-  let movie = localStorage.getItem(id);
+  let movie = localStorage.getItem(id); // 이전에 저장된 movie 데이터 가져오기
   movie = movie ? JSON.parse(movie) : {};
 
-  // 기존 댓글이 있을 경우에는 배열로 저장
+  // 기존 댓글이 있을 경우에는 배열에 추가, 없을 시 새로운 배열로 추가
   if (movie.comments) {
     movie.comments.push({ review, name, pw });
   } else {
@@ -89,12 +68,39 @@ const posting = () => {
   writer.value = "";
 };
 
-// 저장 버튼 클릭 시 이벤트 처리
-window.onload = function () {
-  const saveButton = document.getElementById("submit-btn");
-  saveButton.addEventListener("click", posting);
-};
+// --------------------------------------------------------------------------------------------------------------
 
+// const displayComments = () => {
+//   // 이전에 저장된 댓글 가져오기
+//   const urlParams = new URLSearchParams(window.location.search);
+//   const id = urlParams.get("id");
+
+//   let movie = localStorage.getItem(id); // 이전에 저장된 movie 데이터 가져오기
+//   movie = movie ? JSON.parse(movie) : {};
+
+//   // 리뷰들을 가져오기 위해 movie 객체 내의 review 배열을 참조합니다.
+//   const reviews = movie.review || [];
+
+//   // 댓글을 표시할 HTML 요소 선택
+//   const reviewContainer = document.getElementById("review-comment");
+
+//   // 댓글 템플릿 생성
+//   const commentsHTML = reviews.map((review) => {
+//     return `
+//     <p class="review-comment" id="review-comment">${review}</p>
+//     `;
+//   });
+
+//   // 댓글을 HTML에 삽입
+//   reviewContainer.innerHTML = commentsHTML.join("");
+// };
+
+// // 페이지 로드 시 댓글 표시
+// window.onload = function () {
+//   displayComments();
+// };
+
+// ---------------------------------------------------------------------------------------------------------------
 // 1. 리뷰 저장
 //     1. id를 key으로 저장되어 있던 데이터에 review 배열 추가
 //        객체 불러오기-> 객체에 value 추가 -> 객체 저장
