@@ -43,7 +43,7 @@ function createMovieCards(movie) {
                 src="https://image.tmdb.org/t/p/w400/${movie.poster_path}"
                 class="movie_poster"
               />
-                <h3 class="movie_title">${movie.original_title}</h3>
+                <h3 class="movie_title">${movie.title}</h3>
                 <p class="movie_overview">
                   ${movie.overview}
                 </p>
