@@ -23,7 +23,7 @@ function displaymovies(movies) {
 
 // 영화 데이터 로컬에 저장 
 const movieData = function(movies) {
-  if(localStorage !== null){
+  if(localStorage === null){
     movies.forEach(movie =>{
       const mData = JSON.stringify({movie})
       //console.log(mData);
@@ -115,3 +115,4 @@ loadmovies().then((movies) => {
   displaymovies(movies);
   setEventListeners(movies);
 });
+
