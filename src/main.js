@@ -102,19 +102,16 @@ const findTitle = function(movies) {
 // 이벤트 관리
 function setEventListeners(movies) {
   const form = document.querySelector(".search");
-  // 검색창에 입력 수행 시 
-  form.addEventListener('submit', (event) => {
+  // 검색창에 입력 수행 시
+  form.addEventListener("submit", (event) => {
     event.preventDefault();
     findTitle(movies);
-  })
-  
+  });
 }
 
 // main
-loadmovies()
-  .then(movies => {
-    movieData(movies);
-    displaymovies(movies);
-    setEventListeners(movies);
-  })
-
+loadmovies().then((movies) => {
+  movieData(movies);
+  displaymovies(movies);
+  setEventListeners(movies);
+});
