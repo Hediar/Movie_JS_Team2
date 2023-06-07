@@ -1,6 +1,7 @@
 import * as apikey from "./apikey.js";
+
 // movies api
-const loadmovies = async() => {
+export const loadmovies = async() => {
     const options = {
         method: 'GET',
         headers: {
@@ -108,9 +109,6 @@ const findTitle = function(movies) {
 }
 
 
-
-
-
 // 이벤트 관리
 function setEventListeners(movies) {
   const form = document.querySelector(".search");
@@ -123,6 +121,8 @@ function setEventListeners(movies) {
 
 window.displayMovies = displaymovies;
 window.movieData = movieData;
+
+
 
 // main
 loadmovies().then((movies) => {
