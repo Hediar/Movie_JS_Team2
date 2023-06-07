@@ -5,16 +5,19 @@ const displayDetail = (data) => {
   // console.log(movieDetail);
   containerDetail.innerHTML = movieDetail;
   // console.log(data.movie);
-  changeBackground(data.movie);
+  changeheader(data.movie);
 };
 
-function changeBackground(movie) {
+function changeheader(movie) {
   let bg = document.getElementById("background");
+  let headerTitle = document.getElementById("header-title");
   // console.log(movie);
   // console.log(movie.backdrop_path);
   let backdrop = movie.backdrop_path;
-  console.log(backdrop);
+  let title = movie.title;
+  // console.log(backdrop);
   bg.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 25%), rgba(0, 0, 0, 100%)),url(https://image.tmdb.org/t/p/original/${backdrop}`;
+  headerTitle.innerText = `${title}`;
 }
 
 /*detail 페이지를 구성할 HTML*/
