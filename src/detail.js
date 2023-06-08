@@ -170,8 +170,6 @@ const displayComments = () => {
           <div class="written-comment">
             <p class="writer">${comments.name}</p>
             <p class="review-comment" id="review-comment">${comments.review}</p>
-<<<<<<< HEAD
-=======
             <div id="update" class="hidden">
             <textarea name="comment" id="write-comment" cols="auto" rows="5">${comments.review}</textarea>
           </div>
@@ -183,7 +181,6 @@ const displayComments = () => {
             />
             <button class="comment-confirm" data-index="${index}">확인</button>
           </div>
->>>>>>> f7557cde809d3003882677fd35bd4ceb53f8bae4
           </div>
           <div class="edit-box">
             <div class="btns">
