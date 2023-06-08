@@ -93,11 +93,9 @@ const posting = () => {
 };
 
 const updateReview = (buttonIndex) => {
-  console.log("update");
   const HIDDEN_CLASSNAME = "hidden";
   
   const userReviewElement = document.querySelector(`[data-index="${buttonIndex}"].comment-edit`).closest('.user-review');
-  console.log(userReviewElement); // user-review
 
   const updateBox = userReviewElement.querySelector("#update");
   const currentReview = userReviewElement.querySelector(".review-comment");
@@ -116,7 +114,6 @@ const updateReview = (buttonIndex) => {
 
   confirmButtons.addEventListener("click", () =>{
     const password = userReviewElement.querySelector(".comment-pw2").value;
-    console.log(password);
 
     //비밀번호가 맞다면 수정 박스가 나타나게 만든다.
     if(pwCheck(buttonIndex, password)){ // True 값 반환된다면 
@@ -161,7 +158,6 @@ const deleteReview = (index) => {
 // 2. 비밀번호 일치여부 확인
 function pwCheck(index, password) {
   const currentPassword = movie.comments[index].pw; // 리뷰 객체에서 비밀번호 가져오기
-  console.log(currentPassword);
 
   return password === currentPassword; // 비밀번호 일치 여부 반환
 }
