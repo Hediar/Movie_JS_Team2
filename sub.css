@@ -12,6 +12,9 @@
 a {
   text-decoration: none;
 }
+button {
+  cursor: pointer;
+}
 body {
   position: relative;
   width: 100%;
@@ -250,14 +253,9 @@ header > a {
   height: 50px;
 }
 
-.hidden {
-  display: none;
-}
-
 /* 패스워드 체크 */
 
 #password-check {
-  /* display: flex; */
   margin-top: 10px;
 }
 
@@ -267,7 +265,11 @@ header > a {
   margin-right: 10px;
 }
 
-#password-check > .comment-confirm, .cancel {
+#password-check > .comment-confirm {
   width: 40px;
   height: 30px;
+}
+
+.hidden {
+  display: none;
 }

@@ -18,21 +18,14 @@ function changeheader(movie) {
 }
 /*detail 페이지를 구성할 HTML*/
 const createMovieDetail = (movie) => {
-
   let detail_html = `
-        <img
-        src="https://image.tmdb.org/t/p/w400/${movie.poster_path}"
-        alt="영화이미지"
-        class="movie-img"
-    />
+    <img src="https://image.tmdb.org/t/p/w400/${movie.poster_path}" alt="영화이미지" class="movie-img"/>
     <div class="movie-info">
-        <h4 class="movie-rate">⭐ ${movie.vote_average}</h4>
-        <h2 class="movie-title">${movie.title}</h2>
-        <h3 class="movie-desc">
-        ${movie.overview}
-        </h3>
-    </div>
-      `;
+      <h4 class="movie-rate">⭐ ${movie.vote_average}<span class=movie-vote>(${movie.vote_count})</span></h4>
+      <h2 class="movie-title">${movie.original_title}</h2>
+      <h4 class="movie-detail"><span class="movie-date">${movie.release_date}</span><span>|</span><span class="movie-lang">${movie.original_language}</span><span>|</span><span class="movie-popularity">Popularity: ${movie.popularity}</span></h4>
+      <h3 class="movie-desc">${movie.overview}</h3>
+    </div>`;
   return detail_html;
 };
 
@@ -40,7 +33,6 @@ const createMovieDetail = (movie) => {
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get("id"); // 영화 id 출력됨
 let movie = JSON.parse(localStorage.getItem(id));
-
 
 window.addEventListener("DOMContentLoaded", () => {
   displayDetail(movie);
@@ -86,7 +78,6 @@ const posting = () => {
         textarea.value = ""; // 입력값 초기화
         password.value = "";
         writer.value = "";
-
       }
     }
   }
@@ -94,21 +85,19 @@ const posting = () => {
 
 const updateReview = (buttonIndex) => {
   const HIDDEN_CLASSNAME = "hidden";
-  
-  const userReviewElement = document.querySelector(`[data-index="${buttonIndex}"].comment-edit`).closest('.user-review');
-
+  const userReviewElement = document.querySelector(`[data-index="${buttonIndex}"].comment-edit`).closest('.user-review')
   const updateBox = userReviewElement.querySelector("#update");
   const currentReview = userReviewElement.querySelector(".review-comment");
   const viewReview = userReviewElement.querySelector(".btns");
   const saveRevoewButton = userReviewElement.querySelector("#submit-btn");
-  
+
   const updateButton = userReviewElement.querySelector("#submit-btn");
 
-  // 패스워드 입력하는 곳 선택자 
+  // 패스워드 입력하는 곳 선택자
   const checkPassword = userReviewElement.querySelector("#password-check");
   const confirmButtons = userReviewElement.querySelector(".comment-confirm");
   const cancelButton = userReviewElement.querySelector(".cancel");
-  
+
   checkPassword.classList.remove(HIDDEN_CLASSNAME);
   viewReview.classList.add(HIDDEN_CLASSNAME); // 기존 코멘트, 버튼 보이지 않게 만든다.
   currentReview.classList.add(HIDDEN_CLASSNAME);
@@ -270,5 +259,4 @@ window.onload = function () {
       deleteReview(index);
     });
   });
-  
 };
