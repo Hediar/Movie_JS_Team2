@@ -45,7 +45,9 @@ function createMovieCards(movie) {
     <p class="movie_overview">
       ${movie.overview}
     </p>
-    <p class="movie_rate">${movie.vote_average}⭐(${movie.vote_count})</p>
+    <p class="movie_rate">⭐${movie.vote_average}
+      <span class="movie_vote">(${movie.vote_count})</span>
+    </p>
 </div>
         `;
   return temp_html;
