@@ -24,7 +24,7 @@ function displaymovies(movies) {
 
 // 영화 데이터 로컬에 저장
 const movieData = function (movies) {
-  if (localStorage === null) {
+  if (localStorage.length === 0) {
     movies.forEach((movie) => {
       const mData = JSON.stringify({ movie });
       localStorage.setItem(movie.id, mData);
