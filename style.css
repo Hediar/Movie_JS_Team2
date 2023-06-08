@@ -16,6 +16,7 @@ a {
 button {
   border: 0;
   outline: 0;
+  cursor: pointer;
 }
 button:hover {
   background-color: #333;
@@ -104,9 +105,12 @@ header {
   width: 100px;
   margin-left: 15px;
   padding: 5px 10px;
-  background-color: transparent;
+
+  cursor: pointer;
   border: none;
   border-bottom: 1px solid #fff;
+
+  background-color: transparent;
   color: #fff;
 }
 
@@ -141,9 +145,13 @@ select:focus {
   position: relative;
   display: flex;
   flex-direction: column;
+
   margin: 0 15px 30px;
   padding: 30px;
+
+  cursor: pointer;
   border-radius: 10px;
+
   background-color: #fff;
   color: black;
 }
