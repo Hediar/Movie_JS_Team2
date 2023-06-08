@@ -24,8 +24,8 @@ button:hover {
 }
 body {
   width: 100%;
-  min-width: 1000px;
   height: 100vw;
+  min-width: 1000px;
   background-color: #000;
   color: white;
 
@@ -45,6 +45,15 @@ header {
   background-position: center;
   background-size: cover;
 }
+
+.h1-clock {
+  font-size: 32px;
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 30px;
+  opacity: 0.8;
+}
+
 .title {
   display: flex;
   flex-direction: column;
@@ -164,31 +173,49 @@ header {
   text-align: right;
 }
 
-.h1-clock {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100px; /* 요소의 너비를 지정해주세요 */
-  height: 100px; /* 요소의 높이를 지정해주세요 */
-  margin: 50px 50px;
+footer {
+  height: 200px;
 }
 
 .pagination {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  margin-bottom: 100px;
 }
 
 .pagination-button {
-  background-color: #3b88c3;
-  color: white;
-  border: none;
+  margin: 0 8px;
   padding: 10px 15px;
-  margin: 0 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  color: white;
 }
 
 .pagination-button:hover {
-  background-color: #2374a5;
+  background-color: #fff;
+  color: #000;
+}
+
+.arrow-button {
+  width: 35px;
+  border-radius: 50%;
+  background-color: transparent;
+  color: #fff;
+}
+
+.arrow-button:hover {
+  background: #fff;
+  color: #000;
+  transition: 0.5s;
+}
+
+#left-arrow {
+  margin-right: 15px;
+}
+
+#right-arrow {
+  margin-left: 15px;
 }
