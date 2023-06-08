@@ -60,7 +60,7 @@ const posting = () => {
   const review = textarea.value;
   const name = writer.value;
   const pw = password.value;
-  const movieId = urlParams.get("id");
+  const id = urlParams.get("id");
 
   // 댓글창 유효성검사
 
@@ -73,19 +73,16 @@ const posting = () => {
       if (pw.trim() === "") {
         alert("비밀번호를 입력해주세요.");
       } else {
-        let movie = localStorage.getItem(movieId); // 이전에 저장된 movie 데이터 가져오기
+        let movie = localStorage.getItem(id); // 이전에 저장된 movie 데이터 가져오기
         movie = movie ? JSON.parse(movie) : {};
-
-        // UUID(고유 식별자) 생성
-        let uuid = self.crypto.randomUUID();
 
         // 기존 댓글이 있을 경우에는 배열에 추가, 없을 시 새로운 배열로 추가
         if (movie.comments) {
-          movie.comments.push({ id: uuid, review, name, pw });
+          movie.comments.push({ review, name, pw });
         } else {
-          movie.comments = [{ id: uuid, review, name, pw }];
+          movie.comments = [{ review, name, pw }];
         }
-        localStorage.setItem(movieId, JSON.stringify(movie));
+        localStorage.setItem(id, JSON.stringify(movie));
 
         alert("리뷰가 저장되었습니다.");
 
@@ -102,9 +99,9 @@ const posting = () => {
 const displayComments = () => {
   // 이전에 저장된 댓글 가져오기
   const urlParams = new URLSearchParams(window.location.search);
-  const movieId = urlParams.get("id");
+  const id = urlParams.get("id");
 
-  let movie = localStorage.getItem(movieId); // 이전에 저장된 movie 데이터 가져오기
+  let movie = localStorage.getItem(id); // 이전에 저장된 movie 데이터 가져오기
   movie = movie ? JSON.parse(movie) : {};
 
   // 리뷰들을 가져오기 위해 movie 객체 내의 review 배열을 참조합니다.
@@ -114,7 +111,7 @@ const displayComments = () => {
   const reviewContainer = document.getElementById("review");
 
   // 댓글 템플릿 생성
-  // 고유한 식별자를 속성으로 추가하여 어떤 댓글을 삭제할지 식별
+  // index를 통해 어떤 댓글을 삭제할지 식별
   const commentsHTML = comments.map((comments) => {
     return `
     <div class="user-review">
@@ -122,8 +119,8 @@ const displayComments = () => {
           <p class="review-comment" id="review-comment">${comments.review}</p>
           <div class="edit-box">
             <div class="btns">
-            <button class="comment-edit" data-id="${comments.id}">수정</button>
-            <button class="comment-delete" data-id="${comments.id}">삭제</button>
+            <button class="comment-edit" data-index="${comments.index}">수정</button>
+            <button class="comment-delete" data-index="${comments.index}">삭제</button>
             </div>
           </div>
         </div>
@@ -146,26 +143,28 @@ window.onload = function () {
   const deleteButtons = document.querySelectorAll(".comment-delete");
   deleteButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      const id = button.dataset.id;
-      deleteReview(id);
+      const index = button.dataset.index;
+      deleteReview(index);
     });
   });
 };
 
 // 댓글 삭제
-const deleteReview = (id) => {
+const deleteReview = (index) => {
   const urlParams = new URLSearchParams(window.location.search);
-  const movieId = urlParams.get("id");
+  const id = urlParams.get("id");
 
-  let movie = localStorage.getItem(movieId);
+  let movie = localStorage.getItem(id);
   movie = movie ? JSON.parse(movie) : {};
 
   const comments = movie.comments || [];
-  const updatedComments = comments.filter((comment) => comment.id !== id);
 
-  movie.comments = updatedComments;
-  localStorage.setItem(movieId, JSON.stringify(movie));
+  comments.splice(index, 1);
 
+  movie.comments = comments;
+  localStorage.setItem(id, JSON.stringify(movie));
+
+  location.reload();
   displayComments();
 };
 
