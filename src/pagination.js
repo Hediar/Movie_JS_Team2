@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     movieCards.forEach((card, index) => {
       if (index >= startIndex && index < endIndex) {
-        card.style.display = "block";
+        card.style.display = "flex";
       } else {
         card.style.display = "none";
       }
