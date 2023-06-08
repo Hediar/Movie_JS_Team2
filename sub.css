@@ -145,7 +145,7 @@ header > a {
   font-size: 12px;
 }
 .movie-desc {
-  padding: 15px 0 5px;
+  padding-top: 15px;
   border-top: 1px solid #999;
 
   color: #333;
