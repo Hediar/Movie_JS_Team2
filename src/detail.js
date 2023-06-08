@@ -161,6 +161,7 @@ const deleteReview = (buttonIndex) => {
   // 패스워드 입력하는 곳 선택자
   const checkPassword = userReviewElement.querySelector("#password-check");
   const confirmButtons = userReviewElement.querySelector(".comment-confirm");
+  const cancelButton = userReviewElement.querySelector(".cancel");
 
   checkPassword.classList.remove(HIDDEN_CLASSNAME);
   viewReview.classList.add(HIDDEN_CLASSNAME); // 기존 코멘트, 버튼 보이지 않게 만든다.
@@ -186,6 +187,12 @@ const deleteReview = (buttonIndex) => {
     } else {
       alert("비밀번호가 틀렸습니다.");
     }
+  });
+  // 취소 버튼
+  cancelButton.addEventListener("click", () => {
+    checkPassword.classList.add(HIDDEN_CLASSNAME);
+    viewReview.classList.remove(HIDDEN_CLASSNAME);
+    currentReview.classList.remove(HIDDEN_CLASSNAME);
   });
 };
 // --------------------------------------------------------------------------------
