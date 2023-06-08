@@ -148,6 +148,10 @@ const updateReview = (buttonIndex) => {
  index 기반으로 user-review 찾아야 함 
  */
 
+  const passwordCheck = () => {
+
+  };
+
 // --------------------------------------------------------------------------------------------------------------
 
 const displayComments = () => {
