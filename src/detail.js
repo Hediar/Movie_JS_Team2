@@ -103,7 +103,7 @@ const updateReview = (buttonIndex) => {
     .closest(".user-review");
   console.log(userReviewElement); // user-review
 
-  const updateBox = userReviewElement.querySelector("#update");
+  const updateBox = userReviewElement.querySelector(".update");
   const currentReview = userReviewElement.querySelector(".review-comment");
   const viewReview = userReviewElement.querySelector(".btns");
   const saveRevoewButton = userReviewElement.querySelector("#submit-btn");
@@ -118,7 +118,7 @@ const updateReview = (buttonIndex) => {
   currentReview.classList.add(HIDDEN_CLASSNAME);
 
   // 비밀번호가 맞다면 수정 박스가 나타나게 만든다.
-  // if(true){
+  // if (true) {
   //   checkPassword.classList.add(HIDDEN_CLASSNAME); // 비밀번호 입력 칸 안보이게
   //   updateBox.classList.remove(HIDDEN_CLASSNAME); // 다시 입력할 수 있는 창이 보인다.
   //   saveRevoewButton.classList.remove(HIDDEN_CLASSNAME);
@@ -170,26 +170,21 @@ const displayComments = () => {
           <div class="written-comment">
             <p class="writer">${comments.name}</p>
             <p class="review-comment" id="review-comment">${comments.review}</p>
-            <div id="update" class="hidden">
-            <textarea name="comment" id="write-comment" cols="auto" rows="5">${comments.review}</textarea>
+            <textarea name="comment" id="write-comment" class="update hidden" cols="auto" rows="5">${comments.review}</textarea>
           </div>
-          <div id="password-check" class="hidden">
-            <input
-            type="password"
-            class="comment-pw2"
-            placeholder="비밀번호 입력"
-            />
-            <button class="comment-confirm" data-index="${index}">확인</button>
-          </div>
-          </div>
+
           <div class="edit-box">
             <div class="btns">
             <button class="comment-edit" data-index="${index}">수정</button>
             <button class="comment-delete" data-index="${index}">삭제</button>
             </div>
             <button type="submit" id="submit-btn" class="hidden">저장</button>
+            <div id="password-check" class="hidden">
+              <input type="password" class="comment-pw2" placeholder="비밀번호 입력"/>
+              <button class="comment-confirm" data-index="${index}">확인</button>
+            </div>
           </div>
-        </div>
+    </div>
     `;
   });
 
