@@ -96,6 +96,45 @@ const posting = () => {
   }
 };
 
+const updateReview = (buttonIndex) => {
+  console.log("update");
+  const HIDDEN_CLASSNAME = "hidden";
+  const USERREVIEW_KEY = "";
+  const userReviewElement = document.querySelector(`[data-index="${buttonIndex}"].comment-edit`).closest('.user-review');
+  console.log(userReviewElement); // user-review
+
+  const updateBox = userReviewElement.querySelector("#update");
+  const currentReview = userReviewElement.querySelector(".review-comment");
+  const viewReview = userReviewElement.querySelector(".edit-box");
+  
+  const updateButton = userReviewElement.querySelector("#submit-btn");
+  
+  
+  updateBox.classList.remove(HIDDEN_CLASSNAME); // 다시 입력할 수 있는 창이 보인다.
+  viewReview.classList.add(HIDDEN_CLASSNAME); // 기존 코멘트, 버튼 보이지 않게 만든다.
+  currentReview.classList.add(HIDDEN_CLASSNAME);
+  
+  // 저장 버튼이 눌러지면 적혀져 있는 것은 저장하고 다시 기존 형태로 display 해주어야 한다. 
+  updateButton.addEventListener("click", () => {
+    const newComment = userReviewElement.querySelector("#write-comment").value;
+    console.log(newComment);
+  })
+
+};
+/* 수정 logic
+ 수정버튼 클릭 시 동작
+ 해당 비밀번호가 맞아야 수정이 가능 
+ 해당 배열의 index를 id로 넣을 필요가 있음 
+ 수정 버튼의 comment data 가져오기 
+ 수정 버튼의 review-comment 
+ comment 입력창이 나오면서(comment는 그대로 나오게) 수정할 수 있게 
+ -> review-comment의 text를 가져와야 한다. 
+ 저장 버튼이 나타나야 함 (수정, 삭제는 display none)
+ 저장 버튼을 클릭하면, index를 찾아서 해당 index의 review를 변경해준다.
+
+ index 기반으로 user-review 찾아야 함 
+ */
+
 // --------------------------------------------------------------------------------------------------------------
 
 const displayComments = () => {
@@ -113,15 +152,19 @@ const displayComments = () => {
   const reviewContainer = document.getElementById("review");
 
   // 댓글 템플릿 생성
-  const commentsHTML = comments.map((comments) => {
+  const commentsHTML = comments.map((comments, index) => {
     return `
     <div class="user-review">
           <p class="writer">${comments.name}</p>
           <p class="review-comment" id="review-comment">${comments.review}</p>
+          <div id="update" class="hidden">
+            <textarea name="comment" id="write-comment" cols="auto" rows="5">${comments.review}</textarea>
+            <button type="submit" id="submit-btn">저장</button>
+          </div>
           <div class="edit-box">
             <div class="btns">
-              <button class="comment-edit">수정</button>
-              <button class="comment-delete">삭제</button>
+            <button class="comment-edit" data-index="${index}">수정</button>
+            <button class="comment-delete" data-index="${index}">삭제</button>
             </div>
           </div>
         </div>
@@ -139,6 +182,25 @@ window.onload = function () {
     location.reload();
   });
   displayComments();
+
+  // update 버튼
+  const updateButtons = document.querySelectorAll(".comment-edit");
+  updateButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      console.log(button.dataset.index);
+      buttonIndex = button.dataset.index;
+      updateReview(buttonIndex);
+    });
+  });
+
+  // delete 버튼
+  const deleteButtons = document.querySelectorAll(".comment-delete");
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      
+    });
+  });
+  
 };
 
 // const deleteButtons = document.querySelectorAll(".delete-btn");
@@ -166,9 +228,7 @@ window.onload = function () {
 // };
 
 
-const updateReview = () => {
 
-};
 
 const deleteReview = () => {
 
