@@ -138,7 +138,6 @@ const updateReview = (buttonIndex) => {
   }
   
   
-
 };
 
 /* 수정 logic
