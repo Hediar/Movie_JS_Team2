@@ -1,8 +1,9 @@
 /* detail HTML UPDATE & */
 const displayDetail = (data) => {
   const containerDetail = document.querySelector("#movie-info");
+  //console.log(movie);
   let movieDetail = createMovieDetail(data.movie);
-  // console.log(movieDetail);
+  //console.log(movieDetail);
   containerDetail.innerHTML = movieDetail;
   changeheader(data.movie);
 };
