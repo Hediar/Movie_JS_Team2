@@ -15,7 +15,7 @@ a {
 body {
   position: relative;
   width: 100%;
-  min-width: 1000px;
+  min-width: 1050px;
   background-color: rgb(23, 21, 21);
 
   font-family: "Noto Sans KR", sans-serif;
@@ -26,10 +26,7 @@ body {
   width: 100%;
   height: 60%;
   background: #000;
-  background-image: linear-gradient(rgba(0, 0, 0, 25%), rgba(0, 0, 0, 100%)),
-    url(https://image.tmdb.org/t/p/original/q719jXXEzOoYaps6babgKnONONX.jpg);
-
-  /* 페이지에서 movie.poster_path 번호를 받아와서 이미지 변경할 수 있도록 */
+  background-image: linear-gradient(rgba(0, 0, 0, 25%), rgba(0, 0, 0, 100%));
 
   background-repeat: no-repeat;
   background-position: top;
@@ -51,7 +48,7 @@ header {
 header > h1 {
   width: 100%;
   margin: 0 auto;
-  padding-top: 250px;
+  padding-top: 200px;
   font-family: "Newsreader", serif;
   font-size: 80px;
   text-align: center;
@@ -83,8 +80,9 @@ header > a {
 #movie-info {
   display: flex;
   width: 100%;
-  height: 300px;
-  font-family: "Nanum Myeongjo", serif;
+  height: 350px;
+  padding-bottom: 50px;
+  border-bottom: 1px solid #ebebeb;
 }
 .movie-img {
   display: block;
@@ -92,7 +90,7 @@ header > a {
 .movie-info {
   width: 100%;
   padding: 0px 30px;
-  margin: 10px auto;
+  margin: 0 auto;
   overflow: auto;
 }
 .movie-info::-webkit-scrollbar {
@@ -103,10 +101,20 @@ header > a {
   background-color: #999;
 }
 .movie-rate {
+  display: flex;
+  align-items: center;
+
   padding-bottom: 15px;
   border-bottom: 1px solid #999;
+
   font-size: 20px;
   font-weight: 700;
+}
+.movie-rate > span {
+  margin-left: 6px;
+  font-size: 17px;
+  font-weight: 300;
+  color: #666;
 }
 .movie-title {
   font-size: 24px;
@@ -114,8 +122,30 @@ header > a {
   font-weight: 700;
   letter-spacing: 0.2px;
 }
+.movie-detail {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-top: 1px solid #999;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+}
+.movie-detail > span:nth-child(2),
+.movie-detail > span:nth-child(4) {
+  margin: 0 10px;
+  color: #bbb;
+}
+.movie-lang {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #999;
+}
+.movie-popularity {
+  font-size: 12px;
+}
 .movie-desc {
-  padding-top: 15px;
+  padding: 15px 0 5px;
   border-top: 1px solid #999;
 
   color: #333;
@@ -125,17 +155,16 @@ header > a {
   letter-spacing: 0.2px;
   line-height: 1.5;
 }
-#review {
-  width: 100%;
-  margin: 50px auto;
-  padding-top: 20px;
-  border-top: 1px solid #ebebeb;
-}
+
 .user-review {
   display: flex;
   justify-content: space-between;
   width: 100%;
   margin: 30px 0px;
+}
+.written-comment {
+  width: 100%;
+  flex-grow: 1;
 }
 .writer {
   font-weight: 700;
@@ -152,7 +181,7 @@ header > a {
 .edit-box {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   width: 100px;
   margin-left: 20px;
 }
@@ -193,9 +222,10 @@ header > a {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin: 30px auto;
+  margin: 50px auto;
 }
 #write-comment {
+  width: 100%;
   flex-grow: 1;
   margin-right: 20px;
   padding: 10px;
@@ -218,4 +248,26 @@ header > a {
 #submit-btn {
   width: 100px;
   height: 50px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* 패스워드 체크 */
+
+#password-check {
+  /* display: flex; */
+  margin-top: 10px;
+}
+
+#password-check > .comment-pw2 {
+  width: 120px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+#password-check > .comment-confirm {
+  width: 40px;
+  height: 30px;
 }

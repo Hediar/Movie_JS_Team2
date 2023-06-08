@@ -1,9 +1,7 @@
 /* detail HTML UPDATE & */
 const displayDetail = (data) => {
   const containerDetail = document.querySelector("#movie-info");
-  //console.log(movie);
   let movieDetail = createMovieDetail(data.movie);
-  //console.log(movieDetail);
   containerDetail.innerHTML = movieDetail;
   changeheader(data.movie);
 };
@@ -11,19 +9,16 @@ const displayDetail = (data) => {
 function changeheader(movie) {
   let bg = document.getElementById("background");
   let headerTitle = document.getElementById("header-title");
-  // console.log(movie);
-  // console.log(movie.backdrop_path);
+
   let backdrop = movie.backdrop_path;
   let title = movie.title;
-  // console.log(backdrop);
+
   bg.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 25%), rgba(0, 0, 0, 100%)),url(https://image.tmdb.org/t/p/original/${backdrop}`;
   headerTitle.innerText = `${title}`;
 }
 /*detail 페이지를 구성할 HTML*/
-
 const createMovieDetail = (movie) => {
-  //console.log(movie.poster_path);
-  // movie.orginal_title -> movie.title
+
   let detail_html = `
         <img
         src="https://image.tmdb.org/t/p/w400/${movie.poster_path}"
@@ -41,12 +36,13 @@ const createMovieDetail = (movie) => {
   return detail_html;
 };
 
+// 전역 변수 
+const urlParams = new URLSearchParams(window.location.search);
+const id = urlParams.get("id"); // 영화 id 출력됨
+let movie = JSON.parse(localStorage.getItem(id));
+
 
 window.addEventListener("DOMContentLoaded", () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const id = urlParams.get("id"); // 영화 id 출력됨
-  let movie = JSON.parse(localStorage.getItem(id));
-  
   displayDetail(movie);
 });
 
@@ -74,8 +70,8 @@ const posting = () => {
       if (pw.trim() === "") {
         alert("비밀번호를 입력해주세요.");
       } else {
-        let movie = localStorage.getItem(id); // 이전에 저장된 movie 데이터 가져오기
-        movie = movie ? JSON.parse(movie) : {};
+        // 이전에 저장된 movie 데이터 가져오기
+        //movie = movie ? JSON.parse(movie) : {};
 
         // 기존 댓글이 있을 경우에는 배열에 추가, 없을 시 새로운 배열로 추가
         if (movie.comments) {
@@ -96,12 +92,77 @@ const posting = () => {
   }
 };
 
+const updateReview = (buttonIndex) => {
+  console.log("update");
+  const HIDDEN_CLASSNAME = "hidden";
+  
+  const userReviewElement = document.querySelector(`[data-index="${buttonIndex}"].comment-edit`).closest('.user-review');
+  console.log(userReviewElement); // user-review
+
+  const updateBox = userReviewElement.querySelector("#update");
+  const currentReview = userReviewElement.querySelector(".review-comment");
+  const viewReview = userReviewElement.querySelector(".btns");
+  const saveRevoewButton = userReviewElement.querySelector("#submit-btn");
+  
+  const updateButton = userReviewElement.querySelector("#submit-btn");
+
+  // 패스워드 입력하는 곳 선택자 
+  const checkPassword = userReviewElement.querySelector("#password-check");
+  
+  
+  
+  checkPassword.classList.remove(HIDDEN_CLASSNAME);
+  viewReview.classList.add(HIDDEN_CLASSNAME); // 기존 코멘트, 버튼 보이지 않게 만든다.
+  currentReview.classList.add(HIDDEN_CLASSNAME);
+  
+  // 비밀번호가 맞다면 수정 박스가 나타나게 만든다.
+  if(passwordCheck()){ // True 값 반환된다면 
+    checkPassword.classList.add(HIDDEN_CLASSNAME); // 비밀번호 입력 칸 안보이게
+    updateBox.classList.remove(HIDDEN_CLASSNAME); // 다시 입력할 수 있는 창이 보인다.
+    saveRevoewButton.classList.remove(HIDDEN_CLASSNAME);
+
+    // 저장 버튼이 눌러지면 적혀져 있는 것은 저장하고 다시 기존 형태로 display 해주어야 한다. 
+    updateButton.addEventListener("click", () => {
+      const newComment = userReviewElement.querySelector("#write-comment").value;
+      let updateData = movie.comments[buttonIndex];
+
+      updateData.review = `${newComment}`;
+
+      localStorage.setItem(id, JSON.stringify(movie));
+      alert("수정되었습니다");
+      location.reload();
+    })
+  } 
+  else{
+    alert('비밀번호가 틀렸습니다.');
+  }
+  
+  
+};
+
+/* 수정 logic
+ 수정버튼 클릭 시 동작
+ 해당 비밀번호가 맞아야 수정이 가능 
+ 해당 배열의 index를 id로 넣을 필요가 있음 
+ 수정 버튼의 comment data 가져오기 
+ 수정 버튼의 review-comment 
+ comment 입력창이 나오면서(comment는 그대로 나오게) 수정할 수 있게 
+ -> review-comment의 text를 가져와야 한다. 
+ 저장 버튼이 나타나야 함 (수정, 삭제는 display none)
+ 저장 버튼을 클릭하면, index를 찾아서 해당 index의 review를 변경해준다.
+
+ index 기반으로 user-review 찾아야 함 
+ */
+
+  const passwordCheck = () => {
+    return true;
+  };
+
 // --------------------------------------------------------------------------------------------------------------
 
 const displayComments = () => {
   // 이전에 저장된 댓글 가져오기
-  const urlParams = new URLSearchParams(window.location.search);
-  const id = urlParams.get("id");
+
 
   let movie = localStorage.getItem(id); // 이전에 저장된 movie 데이터 가져오기
   movie = movie ? JSON.parse(movie) : {};
@@ -113,16 +174,30 @@ const displayComments = () => {
   const reviewContainer = document.getElementById("review");
 
   // 댓글 템플릿 생성
-  const commentsHTML = comments.map((comments) => {
+  const commentsHTML = comments.map((comments, index) => {
     return `
     <div class="user-review">
-          <p class="writer">${comments.name}</p>
-          <p class="review-comment" id="review-comment">${comments.review}</p>
+          <div class="written-comment">
+            <p class="writer">${comments.name}</p>
+            <p class="review-comment" id="review-comment">${comments.review}</p>
+            <div id="update" class="hidden">
+            <textarea name="comment" id="write-comment" cols="auto" rows="5">${comments.review}</textarea>
+          </div>
+          <div id="password-check" class="hidden">
+            <input
+            type="password"
+            class="comment-pw2"
+            placeholder="비밀번호 입력"
+            />
+            <button class="comment-confirm" data-index="${index}">확인</button>
+          </div>
+          </div>
           <div class="edit-box">
             <div class="btns">
-              <button class="comment-edit">수정</button>
-              <button class="comment-delete">삭제</button>
+            <button class="comment-edit" data-index="${index}">수정</button>
+            <button class="comment-delete" data-index="${index}">삭제</button>
             </div>
+            <button type="submit" id="submit-btn" class="hidden">저장</button>
           </div>
         </div>
     `;
@@ -139,6 +214,25 @@ window.onload = function () {
     location.reload();
   });
   displayComments();
+
+  // update 버튼
+  const updateButtons = document.querySelectorAll(".comment-edit");
+  updateButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      console.log(button.dataset.index);
+      buttonIndex = button.dataset.index;
+      updateReview(buttonIndex);
+    });
+  });
+
+  // delete 버튼
+  const deleteButtons = document.querySelectorAll(".comment-delete");
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      
+    });
+  });
+  
 };
 
 // const deleteButtons = document.querySelectorAll(".delete-btn");
@@ -166,9 +260,7 @@ window.onload = function () {
 // };
 
 
-const updateReview = () => {
 
-};
 
 const deleteReview = () => {
 
