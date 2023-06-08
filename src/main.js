@@ -65,9 +65,7 @@ const onClickCard = function (movies) {
       //alert('해당 영화의 id는 ' + id_d + '입니다.');
 
       detail_id = movies.find((movie) => movie.id.toString() === id_d);
-      window.location.href = `http://127.0.0.1:5500/detail.html?id=${id_d}`; // 페이지 이동
-
-      //console.log(detail_id);
+      window.location.href = `http://127.0.0.1:5501/detail.html?id=${id_d}`; // 페이지 이동
 
       /* 해당 id에 맞는 객체 배열을 저장한다. 
       같은 id가 없을 경우에만 저장한다.*/

@@ -29,6 +29,7 @@ const createMovieDetail = (movie) => {
   return detail_html;
 };
 
+
 // 전역 변수 
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get("id"); // 영화 id 출력됨
@@ -121,39 +122,75 @@ const updateReview = (buttonIndex) => {
         localStorage.setItem(id, JSON.stringify(movie));
         alert("수정되었습니다");
         location.reload();
-      })
-    } 
-    else{
-      alert('비밀번호가 틀렸습니다.');
+      });
+    } else {
+      alert("비밀번호가 틀렸습니다.");
     }
   });
   // 취소 버튼
-  cancelButton.addEventListener("click", () =>{
+  cancelButton.addEventListener("click", () => {
     checkPassword.classList.add(HIDDEN_CLASSNAME);
-    viewReview.classList.remove(HIDDEN_CLASSNAME); 
-    currentReview.classList.remove(HIDDEN_CLASSNAME);  
+    viewReview.classList.remove(HIDDEN_CLASSNAME);
+    currentReview.classList.remove(HIDDEN_CLASSNAME);
   });
 };
 
-  // 댓글 삭제
-const deleteReview = (index) => {
+const deleteReview = (buttonIndex) => {
+  console.log("Delete");
+  const HIDDEN_CLASSNAME = "hidden";
 
-  let movie = localStorage.getItem(id);
-  movie = movie ? JSON.parse(movie) : {};
+  const userReviewElement = document
+    .querySelector(`[data-index="${buttonIndex}"].comment-delete`)
+    .closest(".user-review");
+  console.log(userReviewElement); // user-review
 
-  const comments = movie.comments || [];
+  const currentReview = userReviewElement.querySelector(".review-comment");
+  const viewReview = userReviewElement.querySelector(".btns");
 
-  comments.splice(index, 1);
+  // 패스워드 입력하는 곳 선택자
+  const checkPassword = userReviewElement.querySelector("#password-check");
+  const confirmButtons = userReviewElement.querySelector(".comment-confirm");
+  const cancelButton = userReviewElement.querySelector(".cancel");
 
-  movie.comments = comments;
-  localStorage.setItem(id, JSON.stringify(movie));
+  checkPassword.classList.remove(HIDDEN_CLASSNAME);
+  viewReview.classList.add(HIDDEN_CLASSNAME); // 기존 코멘트, 버튼 보이지 않게 만든다.
+  currentReview.classList.add(HIDDEN_CLASSNAME);
 
-  location.reload();
+  confirmButtons.addEventListener("click", () => {
+    const password = userReviewElement.querySelector(".comment-pw2").value;
+    console.log(password);
+
+    // 비밀번호가 맞다면 수정 박스가 나타나게 만든다.
+    if (pwCheck(buttonIndex, password)) {
+      // True 값 반환된다면
+      const comments = movie.comments || [];
+
+      comments.splice(buttonIndex, 1);
+
+      movie.comments = comments;
+      localStorage.setItem(id, JSON.stringify(movie));
+
+      alert("삭제되었습니다");
+      location.reload();
+      displayComments();
+    } else {
+      alert("비밀번호가 틀렸습니다.");
+    }
+  });
+  // 취소 버튼
+  cancelButton.addEventListener("click", () => {
+    checkPassword.classList.add(HIDDEN_CLASSNAME);
+    viewReview.classList.remove(HIDDEN_CLASSNAME);
+    currentReview.classList.remove(HIDDEN_CLASSNAME);
+  });
 };
+// --------------------------------------------------------------------------------
 
-// 2. 비밀번호 일치여부 확인
+//비밀번호 일치여부 확인
 function pwCheck(index, password) {
   const currentPassword = movie.comments[index].pw; // 리뷰 객체에서 비밀번호 가져오기
+  console.log(currentPassword);
+
 
   return password === currentPassword; // 비밀번호 일치 여부 반환
 }
@@ -189,8 +226,7 @@ function deleteCheck(index) {
 const displayComments = () => {
   // 이전에 저장된 댓글 가져오기
 
-  let movie = localStorage.getItem(id); // 이전에 저장된 movie 데이터 가져오기
-  movie = movie ? JSON.parse(movie) : {};
+  movie = movie ? movie : {};
 
   // 리뷰들을 가져오기 위해 movie 객체 내의 review 배열을 참조합니다.
   const comments = movie.comments || [];
@@ -226,6 +262,9 @@ const displayComments = () => {
             <button type="submit" id="submit-btn" class="hidden">저장</button>
           </div>
         </div>
+        <button type="submit" id="submit-btn" class="hidden">저장</button>
+      </div>
+    </div>
     `;
   });
 
@@ -254,9 +293,9 @@ window.onload = function () {
   const deleteButtons = document.querySelectorAll(".comment-delete");
   deleteButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      const index = button.dataset.index;
-      //deleteCheck(index);
-      deleteReview(index);
+      buttonIndex = button.dataset.index;
+      deleteReview(buttonIndex);
+
     });
   });
 };
