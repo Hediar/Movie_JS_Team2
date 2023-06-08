@@ -29,8 +29,7 @@ const createMovieDetail = (movie) => {
   return detail_html;
 };
 
-
-// 전역 변수 
+// 전역 변수
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get("id"); // 영화 id 출력됨
 let movie = JSON.parse(localStorage.getItem(id));
@@ -42,17 +41,15 @@ window.addEventListener("DOMContentLoaded", () => {
 // ----------------------------------------------------------------------------------
 /* 리뷰 */
 const posting = () => {
-  const textarea = document.getElementById("write-comment");
+  const textarea = document.querySelector("#write-comment");
   const password = document.getElementById("comment-pw1");
   const writer = document.getElementById("comment-name");
-  const urlParams = new URLSearchParams(window.location.search);
 
   const review = textarea.value;
   const name = writer.value;
   const pw = password.value;
-  const id = urlParams.get("id");
 
-  // 댓글창 유효성검사
+  //댓글창 유효성검사
 
   if (review.trim() === "") {
     alert("리뷰를 입력해주세요.");
@@ -86,7 +83,10 @@ const posting = () => {
 
 const updateReview = (buttonIndex) => {
   const HIDDEN_CLASSNAME = "hidden";
-  const userReviewElement = document.querySelector(`[data-index="${buttonIndex}"].comment-edit`).closest('.user-review')
+
+  const userReviewElement = document
+    .querySelector(`[data-index="${buttonIndex}"].comment-edit`)
+    .closest(".user-review");
   const updateBox = userReviewElement.querySelector("#update");
   const currentReview = userReviewElement.querySelector(".review-comment");
   const viewReview = userReviewElement.querySelector(".btns");
@@ -104,17 +104,19 @@ const updateReview = (buttonIndex) => {
   currentReview.classList.add(HIDDEN_CLASSNAME);
 
   // 확인 버튼
-  confirmButtons.addEventListener("click", () =>{
+  confirmButtons.addEventListener("click", () => {
     const password = userReviewElement.querySelector(".comment-pw2").value;
     //비밀번호가 맞다면 수정 박스가 나타나게 만든다.
-    if(pwCheck(buttonIndex, password)){ // True 값 반환된다면 
+    if (pwCheck(buttonIndex, password)) {
+      // True 값 반환된다면
       checkPassword.classList.add(HIDDEN_CLASSNAME); // 비밀번호 입력 칸 안보이게
       updateBox.classList.remove(HIDDEN_CLASSNAME); // 다시 입력할 수 있는 창이 보인다.
       saveRevoewButton.classList.remove(HIDDEN_CLASSNAME);
 
-      // 저장 버튼이 눌러지면 적혀져 있는 것은 저장하고 다시 기존 형태로 display 해주어야 한다. 
+      // 저장 버튼이 눌러지면 적혀져 있는 것은 저장하고 다시 기존 형태로 display 해주어야 한다.
       updateButton.addEventListener("click", () => {
-        const newComment = userReviewElement.querySelector("#write-comment").value;
+        const newComment =
+          userReviewElement.querySelector("#update-comment").value;
         let updateData = movie.comments[buttonIndex];
 
         updateData.review = `${newComment}`;
@@ -191,34 +193,7 @@ function pwCheck(index, password) {
   const currentPassword = movie.comments[index].pw; // 리뷰 객체에서 비밀번호 가져오기
   console.log(currentPassword);
 
-
   return password === currentPassword; // 비밀번호 일치 여부 반환
-}
-
-// 1. 삭제 버튼 클릭시 deleteCheck 함수 실행, index : 버튼의 index
-function deleteCheck(index) {
-  // 입력창 띄우기
-  const pwInput = document.querySelector(".comment-pw2");
-  pwInput.classList.remove("hidden");
-  pwInput.focus();
-
-  const confirmButtons = document.querySelectorAll(".comment-confirm");
-
-  // 확인 버튼 클릭 이벤트
-  confirmButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const pwInput = document.querySelector(".comment-pw2");
-      const password = pwInput.value;
-
-      if (pwCheck(index, password)) {
-        deleteReview(index);
-        pwInput.classList.add("hidden");
-        pwInput.value = "";
-      } else {
-        alert("비밀번호가 일치하지 않습니다.");
-      }
-    });
-  });
 }
 
 // --------------------------------------------------------------------------------------------------------------
@@ -238,29 +213,26 @@ const displayComments = () => {
   const commentsHTML = comments.map((comments, index) => {
     return `
     <div class="user-review">
-          <div class="written-comment">
-            <p class="writer">${comments.name}</p>
-            <p class="review-comment" id="review-comment">${comments.review}</p>
-            <div id="update" class="hidden">
-            <textarea name="comment" id="write-comment" cols="auto" rows="5">${comments.review}</textarea>
-          </div>
-          <div id="password-check" class="hidden">
-            <input
+      <div class="written-comment">
+        <p class="writer">${comments.name}</p>
+        <p class="review-comment" id="review-comment">${comments.review}</p>
+        <div id="update" class="hidden">
+          <textarea name="comment" id="update-comment" cols="auto" rows="5">${comments.review}</textarea>
+        </div>
+        <div id="password-check" class="hidden">
+          <input
             type="password"
             class="comment-pw2"
             placeholder="비밀번호 입력"
-            />
-            <button class="comment-confirm" data-index="${index}">확인</button>
-            <button class="cancel" data-index="${index}">취소</button>
-          </div>
-          </div>
-          <div class="edit-box">
-            <div class="btns">
-            <button class="comment-edit" data-index="${index}">수정</button>
-            <button class="comment-delete" data-index="${index}">삭제</button>
-            </div>
-            <button type="submit" id="submit-btn" class="hidden">저장</button>
-          </div>
+          />
+          <button class="comment-confirm" data-index="${index}">확인</button>
+          <button class="cancel" data-index="${index}">취소</button>
+        </div>
+      </div>
+      <div class="edit-box">
+        <div class="btns">
+          <button class="comment-edit" data-index="${index}">수정</button>
+          <button class="comment-delete" data-index="${index}">삭제</button>
         </div>
         <button type="submit" id="submit-btn" class="hidden">저장</button>
       </div>
@@ -295,7 +267,6 @@ window.onload = function () {
     button.addEventListener("click", () => {
       buttonIndex = button.dataset.index;
       deleteReview(buttonIndex);
-
     });
   });
 };
