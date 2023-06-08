@@ -105,14 +105,26 @@ const updateReview = (buttonIndex) => {
 
   const updateBox = userReviewElement.querySelector("#update");
   const currentReview = userReviewElement.querySelector(".review-comment");
-  const viewReview = userReviewElement.querySelector(".edit-box");
+  const viewReview = userReviewElement.querySelector(".btns");
+  const saveRevoewButton = userReviewElement.querySelector("#submit-btn");
   
   const updateButton = userReviewElement.querySelector("#submit-btn");
+
+  // 패스워드 입력하는 곳 선택자 
+  const checkPassword = userReviewElement.querySelector("#password-check");
   
   
-  updateBox.classList.remove(HIDDEN_CLASSNAME); // 다시 입력할 수 있는 창이 보인다.
+  
+  checkPassword.classList.remove(HIDDEN_CLASSNAME);
   viewReview.classList.add(HIDDEN_CLASSNAME); // 기존 코멘트, 버튼 보이지 않게 만든다.
   currentReview.classList.add(HIDDEN_CLASSNAME);
+  
+  // 비밀번호가 맞다면 수정 박스가 나타나게 만든다.
+  // if(true){
+  //   checkPassword.classList.add(HIDDEN_CLASSNAME); // 비밀번호 입력 칸 안보이게
+  //   updateBox.classList.remove(HIDDEN_CLASSNAME); // 다시 입력할 수 있는 창이 보인다.
+  //   saveRevoewButton.classList.remove(HIDDEN_CLASSNAME);
+  // }
   
   // 저장 버튼이 눌러지면 적혀져 있는 것은 저장하고 다시 기존 형태로 display 해주어야 한다. 
   updateButton.addEventListener("click", () => {
@@ -121,6 +133,7 @@ const updateReview = (buttonIndex) => {
   })
 
 };
+
 /* 수정 logic
  수정버튼 클릭 시 동작
  해당 비밀번호가 맞아야 수정이 가능 
@@ -155,17 +168,27 @@ const displayComments = () => {
   const commentsHTML = comments.map((comments, index) => {
     return `
     <div class="user-review">
-          <p class="writer">${comments.name}</p>
-          <p class="review-comment" id="review-comment">${comments.review}</p>
-          <div id="update" class="hidden">
+          <div class="written-comment">
+            <p class="writer">${comments.name}</p>
+            <p class="review-comment" id="review-comment">${comments.review}</p>
+            <div id="update" class="hidden">
             <textarea name="comment" id="write-comment" cols="auto" rows="5">${comments.review}</textarea>
-            <button type="submit" id="submit-btn">저장</button>
+          </div>
+          <div id="password-check" class="hidden">
+            <input
+            type="password"
+            class="comment-pw2"
+            placeholder="비밀번호 입력"
+            />
+            <button class="comment-confirm" data-index="${index}">확인</button>
+          </div>
           </div>
           <div class="edit-box">
             <div class="btns">
             <button class="comment-edit" data-index="${index}">수정</button>
             <button class="comment-delete" data-index="${index}">삭제</button>
             </div>
+            <button type="submit" id="submit-btn" class="hidden">저장</button>
           </div>
         </div>
     `;
