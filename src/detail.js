@@ -112,18 +112,24 @@ const displayComments = () => {
 
   // 댓글 템플릿 생성
   // index를 통해 어떤 댓글을 삭제할지 식별
-  const commentsHTML = comments.map((comments) => {
+  const commentsHTML = comments.map((comments, index) => {
     return `
     <div class="user-review">
-          <p class="writer">${comments.name}</p>
-          <p class="review-comment" id="review-comment">${comments.review}</p>
-          <div class="edit-box">
-            <div class="btns">
-            <button class="comment-edit" data-index="${comments.index}">수정</button>
-            <button class="comment-delete" data-index="${comments.index}">삭제</button>
-            </div>
+        <p class="writer">${comments.name}</p>
+        <p class="review-comment" id="review-comment">${comments.review}</p>
+        <div class="edit-box">
+          <div class="btns">
+            <button class="comment-edit" data-index="${index}">수정</button>
+            <button class="comment-delete" data-index="${index}">삭제</button>
+            <button class="comment-confirm" data-index="${index}">확인</button>
           </div>
+          <input
+            type="password"
+            class="comment-pw2"
+            placeholder="비밀번호 입력"
+          />
         </div>
+      </div>
     `;
   });
 
@@ -144,7 +150,8 @@ window.onload = function () {
   deleteButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const index = button.dataset.index;
-      deleteReview(index);
+      deleteCheck(index);
+      // deleteReview(index);
     });
   });
 };
@@ -167,6 +174,48 @@ const deleteReview = (index) => {
   location.reload();
   displayComments();
 };
+
+// 2. 비밀번호 일치여부 확인
+function pwCheck(index, password) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const id = urlParams.get("id");
+
+  let movie = localStorage.getItem(id);
+  movie = movie ? JSON.parse(movie) : {};
+
+  const comments = movie.comments || [];
+
+  const review = comments[index];
+  const storedPassword = review.pw; // 리뷰 객체에서 비밀번호 가져오기
+
+  return password === storedPassword; // 비밀번호 일치 여부 반환
+}
+
+// 1. 삭제 버튼 클릭시 deleteCheck 함수 실행, index : 버튼의 index
+function deleteCheck(index) {
+  // 입력창 띄우기
+  const pwInput = document.querySelector(".comment-pw2");
+  pwInput.classList.remove("hidden");
+  pwInput.focus();
+
+  const confirmButtons = document.querySelectorAll(".comment-confirm");
+
+  // 확인 버튼 클릭 이벤트
+  confirmButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const pwInput = document.querySelector(".comment-pw2");
+      const password = pwInput.value;
+
+      if (pwCheck(index, password)) {
+        deleteReview(index);
+        pwInput.classList.add("hidden");
+        pwInput.value = "";
+      } else {
+        alert("비밀번호가 일치하지 않습니다.");
+      }
+    });
+  });
+}
 
 // -----------------------------------------
 // const updateReview = () => {};
