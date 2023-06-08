@@ -23,41 +23,20 @@
   </header>
   <section class="inner">
     <section id="movie-info">
-      <!-- <img
-          src="https://image.tmdb.org/t/p/w300/${movie.poster_path}"
-          alt="영화이미지"
-          class="movie-img"
-        />
-        <div class="movie-info">
-          <h4 class="movie-rate">⭐ ${movie.vote_average}</h4>
-          <h2 class="movie-title">${movie.original_title}</h2>
-          <h3 class="movie-desc">
-            ${movie.overview}
-          </h3>
-        </div> -->
+
     </section>
     <section id="review">
-      <div class="user-review">
-        <p class="review-comment">
-          여기에 작성한 리뷰 코멘트가 입력됩니다 긴 글을 적게 되면 스크롤이
-          생깁니다 여기에 작성한 리뷰 코멘트가 입력됩니다 긴 글을 적게 되면
-          스크롤이 생깁니다 여기에 작성한 리뷰 코멘트가 입력됩니다 긴 글을
-          적게 되면 칸이 자동으로 늘어납니다 여기에 작성한 리뷰 코멘트가
-          입력됩니다 긴 글을 적게 되면 칸이 자동으로 늘어납니다 여기에 작성한
-          리뷰 코멘트가 입력됩니다 긴 글을 적게 되면 칸이 자동으로 늘어납니다
-          여기에 작성한 리뷰 코멘트가 입력됩니다 긴 글을 적게 되면 칸이
-          자동으로 늘어납니다 여기에 작성한 리뷰 코멘트가 입력됩니다 긴 글을
-          적게 되면 칸이 자동으로 늘어납니다 여기에 작성한 리뷰
-        </p>
-        <div class="edit-box">
-          <div class="btns">
-            <button class="comment-edit">수정</button>
-            <button class="comment-delete">삭제</button>
-          </div>
-          <input type="password" class="comment-pw" id="comment-pw2" placeholder="비밀번호 입력" />
-          <!-- .edit-box 안의 .comment-pw는 평상시에는 display:none;으로 처리해 두고 수정/삭제버튼 누를시 display:block 처리해 주면 됨 -->
+
+
+      <div class="edit-box">
+        <div class="btns">
+          <button class="comment-edit">수정</button>
+          <button class="comment-delete">삭제</button>
         </div>
-      </div>
+        <input type="password" class="comment-pw" id="comment-pw2" placeholder="비밀번호 입력" />
+
+        <!-- </div>
+        </div> -->
     </section>
     <div class="submit">
       <textarea name="comment" id="write-comment" cols="auto" rows="5"></textarea>
@@ -65,8 +44,41 @@
         <input type="text" class="comment-name" id="comment-name" placeholder="닉네임 입력" />
         <input type="password" class="comment-pw" id="comment-pw1" placeholder="비밀번호 입력" />
         <button type="submit" id="submit-btn">저장</button>
+
       </div>
   </section>
+  </section>
+  <section id="review">
+    <div class="user-review">
+      <p class="review-comment">
+        여기에 작성한 리뷰 코멘트가 입력됩니다 긴 글을 적게 되면 스크롤이
+        생깁니다 여기에 작성한 리뷰 코멘트가 입력됩니다 긴 글을 적게 되면
+        스크롤이 생깁니다 여기에 작성한 리뷰 코멘트가 입력됩니다 긴 글을
+        적게 되면 칸이 자동으로 늘어납니다 여기에 작성한 리뷰 코멘트가
+        입력됩니다 긴 글을 적게 되면 칸이 자동으로 늘어납니다 여기에 작성한
+        리뷰 코멘트가 입력됩니다 긴 글을 적게 되면 칸이 자동으로 늘어납니다
+        여기에 작성한 리뷰 코멘트가 입력됩니다 긴 글을 적게 되면 칸이
+        자동으로 늘어납니다 여기에 작성한 리뷰 코멘트가 입력됩니다 긴 글을
+        적게 되면 칸이 자동으로 늘어납니다 여기에 작성한 리뷰
+      </p>
+      <div class="edit-box">
+        <div class="btns">
+          <button class="comment-edit">수정</button>
+          <button class="comment-delete">삭제</button>
+        </div>
+        <input type="password" class="comment-pw" id="comment-pw2" placeholder="비밀번호 입력" />
+        <!-- .edit-box 안의 .comment-pw는 평상시에는 display:none;으로 처리해 두고 수정/삭제버튼 누를시 display:block 처리해 주면 됨 -->
+      </div>
+    </div>
+  </section>
+  <div class="submit">
+    <textarea name="comment" id="write-comment" cols="auto" rows="5"></textarea>
+    <div class="submit-btns">
+      <input type="text" class="comment-name" id="comment-name" placeholder="닉네임 입력" />
+      <input type="password" class="comment-pw" id="comment-pw1" placeholder="비밀번호 입력" />
+      <button type="submit" id="submit-btn">저장</button>
+    </div>
+    </section>
 </body>
 
 </html>
