@@ -107,14 +107,15 @@ const updateReview = (buttonIndex) => {
   // 패스워드 입력하는 곳 선택자 
   const checkPassword = userReviewElement.querySelector("#password-check");
   const confirmButtons = userReviewElement.querySelector(".comment-confirm");
+  const cancelButton = userReviewElement.querySelector(".cancel");
   
   checkPassword.classList.remove(HIDDEN_CLASSNAME);
   viewReview.classList.add(HIDDEN_CLASSNAME); // 기존 코멘트, 버튼 보이지 않게 만든다.
   currentReview.classList.add(HIDDEN_CLASSNAME);
 
+  // 확인 버튼
   confirmButtons.addEventListener("click", () =>{
     const password = userReviewElement.querySelector(".comment-pw2").value;
-
     //비밀번호가 맞다면 수정 박스가 나타나게 만든다.
     if(pwCheck(buttonIndex, password)){ // True 값 반환된다면 
       checkPassword.classList.add(HIDDEN_CLASSNAME); // 비밀번호 입력 칸 안보이게
@@ -136,6 +137,12 @@ const updateReview = (buttonIndex) => {
     else{
       alert('비밀번호가 틀렸습니다.');
     }
+  });
+  // 취소 버튼
+  cancelButton.addEventListener("click", () =>{
+    checkPassword.classList.add(HIDDEN_CLASSNAME);
+    viewReview.classList.remove(HIDDEN_CLASSNAME); 
+    currentReview.classList.remove(HIDDEN_CLASSNAME);  
   });
 };
 
@@ -219,6 +226,7 @@ const displayComments = () => {
             placeholder="비밀번호 입력"
             />
             <button class="comment-confirm" data-index="${index}">확인</button>
+            <button class="cancel" data-index="${index}">취소</button>
           </div>
           </div>
           <div class="edit-box">
