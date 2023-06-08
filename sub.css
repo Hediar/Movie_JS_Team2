@@ -12,6 +12,9 @@
 a {
   text-decoration: none;
 }
+button {
+  cursor: pointer;
+}
 body {
   position: relative;
   width: 100%;
@@ -145,7 +148,7 @@ header > a {
   font-size: 12px;
 }
 .movie-desc {
-  padding: 15px 0 5px;
+  padding: 15px 0 0px;
   border-top: 1px solid #999;
 
   color: #333;
@@ -250,14 +253,10 @@ header > a {
   height: 50px;
 }
 
-.hidden {
-  display: none;
-}
 
 /* 패스워드 체크 */
 
 #password-check {
-  /* display: flex; */
   margin-top: 10px;
 }
 
@@ -267,8 +266,12 @@ header > a {
   margin-right: 10px;
 }
 
-#password-check > .comment-confirm,
-.cancel {
+#password-check > button {
   width: 40px;
   height: 30px;
+  padding-bottom: 3px;
+}
+
+.hidden {
+  display: none;
 }

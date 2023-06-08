@@ -25,7 +25,6 @@ function displaymovies(movies) {
 // 영화 데이터 로컬에 저장
 const movieData = function (movies) {
   if (localStorage.length === 0) {
-    // 로컬저장소에 데이터 저장 조건 수정
     movies.forEach((movie) => {
       const mData = JSON.stringify({ movie });
       localStorage.setItem(movie.id, mData);
@@ -46,7 +45,9 @@ function createMovieCards(movie) {
     <p class="movie_overview">
       ${movie.overview}
     </p>
-    <p class="movie_rate">${movie.vote_average}⭐(${movie.vote_count})</p>
+    <p class="movie_rate">⭐${movie.vote_average}
+      <span class="movie_vote">(${movie.vote_count})</span>
+    </p>
 </div>
         `;
   return temp_html;
@@ -65,8 +66,6 @@ const onClickCard = function (movies) {
 
       detail_id = movies.find((movie) => movie.id.toString() === id_d);
       window.location.href = `http://127.0.0.1:5501/detail.html?id=${id_d}`; // 페이지 이동
-
-      //console.log(detail_id);
 
       /* 해당 id에 맞는 객체 배열을 저장한다. 
       같은 id가 없을 경우에만 저장한다.*/
@@ -118,6 +117,7 @@ loadmovies().then((movies) => {
   orderByTitle(movies);
   orderByRate(movies);
   orderByVote(movies);
+  orderByCountry(movies);
 });
 
 // 알파벳 순서에 따른 정렬 함수
@@ -135,6 +135,36 @@ function orderByTitle(movies) {
     });
     displaymovies(movies);
     changeArrow(element);
+  });
+}
+// 나라에 따른 영화 분류 함수
+function orderByCountry(movies) {
+  const dropdown = document.getElementById("select-country");
+
+  dropdown.addEventListener("change", function () {
+    const selectedOption = dropdown.options[dropdown.selectedIndex].value;
+
+    const filterMovies = movies.filter(function (movie) {
+      let language = movie.original_language;
+
+      if (selectedOption === "korea" && language === "ko") {
+        return movie;
+      } else if (selectedOption === "america" && language === "en") {
+        return movie;
+      } else if (selectedOption === "japan" && language === "ja") {
+        return movie;
+      } else if (
+        selectedOption === "etc" &&
+        language !== "ko" &&
+        language !== "en" &&
+        language != "ja"
+      ) {
+        return movie;
+      } else if (selectedOption === "all") {
+        return movie;
+      }
+    });
+    displaymovies(filterMovies);
   });
 }
 

@@ -1,41 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Movie</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="src/clock.js" defer></script>
-    <script src="src/main.js" type="module"></script>
-    <script src="src/pagination.js" type="module"></script>
-  </head>
-  <body>
-    <!-- Logo -->
-    <header></header>
-    <section class="title">
-      <h1>Top Rated Movies</h1>
-      <label>Search Movie by its title </label>
-      <form class="search">
-        <!--  onsubmit="handleSearch(event)" -->
-        <input
-          type="text"
-          id="search-input"
-          placeholder="검색할 영화 제목을 입력해주세요."
-          autofocus
-        />
-        <button type="submit" id="search-btn">검색</button>
-      </form>
-    </section>
-    <div id="filter-menu">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Movie</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="src/clock.js" defer></script>
+  <script src="src/main.js" type="module"></script>
+  <script src="src/pagination.js" type="module"></script>
+
+</head>
+
+<body>
+  <!-- Logo -->
+  <header></header>
+  <h1 class="h1-clock"></h1>
+  <section class="title">
+    <h1>Top Rated Movies</h1>
+    <label>Search Movie by its title </label>
+    <form class="search">
+      <!--  onsubmit="handleSearch(event)" -->
+      <input type="text" id="search-input" placeholder="검색할 영화 제목을 입력해주세요." autofocus />
+      <button type="submit" id="search-btn">검색</button>
+    </form>
+  </section>
+  <div id="filter-menu">
+    <select id="select-country">
+      <option value="all">전체</option>
+      <option value="korea">한국</option>
+      <option value="america">미국</option>
+      <option value="japan">일본</option>
+      <option value="etc">기타</option>
+    </select>
+    <div class="filter-btns">
       <button class="filter-title" id="filter-title">제목▼</button>
       <button class="filter-rate" id="filter-rate">평점▼</button>
       <button class="filter-vote" id="filter-vote">투표수▼</button>
     </div>
-    <!-- 오름차/내림차순서로 변경됨에 따라 ▼ ▲ 가 변경되겠끔 하면 될 것 같습니다! -->
-    <section class="movie-wrap"></section>
-
-    <h1 class="h1-clock"></h1>
+  </div>
+  <!-- 오름차/내림차순서로 변경됨에 따라 ▼ ▲ 가 변경되겠끔 하면 될 것 같습니다! -->
+  <section class="movie-wrap"></section>
+  <footer>
     <div class="pagination" id="pagination"></div>
-  </body>
+  </footer>
+</body>
+
 </html>
