@@ -26,10 +26,7 @@ body {
   width: 100%;
   height: 60%;
   background: #000;
-  background-image: linear-gradient(rgba(0, 0, 0, 25%), rgba(0, 0, 0, 100%)),
-    url(https://image.tmdb.org/t/p/original/q719jXXEzOoYaps6babgKnONONX.jpg);
-
-  /* 페이지에서 movie.poster_path 번호를 받아와서 이미지 변경할 수 있도록 */
+  background-image: linear-gradient(rgba(0, 0, 0, 25%), rgba(0, 0, 0, 100%));
 
   background-repeat: no-repeat;
   background-position: top;
@@ -86,7 +83,6 @@ header > a {
   height: 350px;
   padding-bottom: 50px;
   border-bottom: 1px solid #ebebeb;
-  font-family: "Nanum Myeongjo", serif;
 }
 .movie-img {
   display: block;
@@ -111,7 +107,6 @@ header > a {
   padding-bottom: 15px;
   border-bottom: 1px solid #999;
 
-  font-family: "Noto Sans KR", sans-serif;
   font-size: 20px;
   font-weight: 700;
 }
@@ -132,7 +127,6 @@ header > a {
   align-items: center;
   padding: 10px 0;
   border-top: 1px solid #999;
-  font-family: "Noto Sans KR", sans-serif;
   font-size: 14px;
   font-weight: 400;
   color: #333;
