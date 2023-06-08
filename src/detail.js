@@ -108,61 +108,120 @@ const updateReview = (buttonIndex) => {
 
   // 패스워드 입력하는 곳 선택자 
   const checkPassword = userReviewElement.querySelector("#password-check");
-  
-  
+  const confirmButtons = userReviewElement.querySelector(".comment-confirm");
   
   checkPassword.classList.remove(HIDDEN_CLASSNAME);
   viewReview.classList.add(HIDDEN_CLASSNAME); // 기존 코멘트, 버튼 보이지 않게 만든다.
   currentReview.classList.add(HIDDEN_CLASSNAME);
+
+  confirmButtons.addEventListener("click", () =>{
+    const password = userReviewElement.querySelector(".comment-pw2").value;
+    console.log(password);
+
+    //비밀번호가 맞다면 수정 박스가 나타나게 만든다.
+    if(pwCheck(buttonIndex, password)){ // True 값 반환된다면 
+      checkPassword.classList.add(HIDDEN_CLASSNAME); // 비밀번호 입력 칸 안보이게
+      updateBox.classList.remove(HIDDEN_CLASSNAME); // 다시 입력할 수 있는 창이 보인다.
+      saveRevoewButton.classList.remove(HIDDEN_CLASSNAME);
+
+      // 저장 버튼이 눌러지면 적혀져 있는 것은 저장하고 다시 기존 형태로 display 해주어야 한다. 
+      updateButton.addEventListener("click", () => {
+        const newComment = userReviewElement.querySelector("#write-comment").value;
+        let updateData = movie.comments[buttonIndex];
+
+        updateData.review = `${newComment}`;
+
+        localStorage.setItem(id, JSON.stringify(movie));
+        alert("수정되었습니다");
+        location.reload();
+      })
+    } 
+    else{
+      alert('비밀번호가 틀렸습니다.');
+    }
+  });
   
-  // 비밀번호가 맞다면 수정 박스가 나타나게 만든다.
-  if(passwordCheck()){ // True 값 반환된다면 
-    checkPassword.classList.add(HIDDEN_CLASSNAME); // 비밀번호 입력 칸 안보이게
-    updateBox.classList.remove(HIDDEN_CLASSNAME); // 다시 입력할 수 있는 창이 보인다.
-    saveRevoewButton.classList.remove(HIDDEN_CLASSNAME);
 
-    // 저장 버튼이 눌러지면 적혀져 있는 것은 저장하고 다시 기존 형태로 display 해주어야 한다. 
-    updateButton.addEventListener("click", () => {
-      const newComment = userReviewElement.querySelector("#write-comment").value;
-      let updateData = movie.comments[buttonIndex];
+  
+  // //비밀번호가 맞다면 수정 박스가 나타나게 만든다.
+  // if(passwordCheck(buttonIndex, )){ // True 값 반환된다면 
+  //   checkPassword.classList.add(HIDDEN_CLASSNAME); // 비밀번호 입력 칸 안보이게
+  //   updateBox.classList.remove(HIDDEN_CLASSNAME); // 다시 입력할 수 있는 창이 보인다.
+  //   saveRevoewButton.classList.remove(HIDDEN_CLASSNAME);
 
-      updateData.review = `${newComment}`;
+  //   // 저장 버튼이 눌러지면 적혀져 있는 것은 저장하고 다시 기존 형태로 display 해주어야 한다. 
+  //   updateButton.addEventListener("click", () => {
+  //     const newComment = userReviewElement.querySelector("#write-comment").value;
+  //     let updateData = movie.comments[buttonIndex];
 
-      localStorage.setItem(id, JSON.stringify(movie));
-      alert("수정되었습니다");
-      location.reload();
-    })
-  } 
-  else{
-    alert('비밀번호가 틀렸습니다.');
-  }
+  //     updateData.review = `${newComment}`;
+
+  //     localStorage.setItem(id, JSON.stringify(movie));
+  //     alert("수정되었습니다");
+  //     location.reload();
+  //   })
+  // } 
+  // else{
+  //   alert('비밀번호가 틀렸습니다.');
+  // }
   
   
 };
 
-/* 수정 logic
- 수정버튼 클릭 시 동작
- 해당 비밀번호가 맞아야 수정이 가능 
- 해당 배열의 index를 id로 넣을 필요가 있음 
- 수정 버튼의 comment data 가져오기 
- 수정 버튼의 review-comment 
- comment 입력창이 나오면서(comment는 그대로 나오게) 수정할 수 있게 
- -> review-comment의 text를 가져와야 한다. 
- 저장 버튼이 나타나야 함 (수정, 삭제는 display none)
- 저장 버튼을 클릭하면, index를 찾아서 해당 index의 review를 변경해준다.
+  // 댓글 삭제
+const deleteReview = (index) => {
 
- index 기반으로 user-review 찾아야 함 
- */
+  let movie = localStorage.getItem(id);
+  movie = movie ? JSON.parse(movie) : {};
 
-  const passwordCheck = () => {
-    return true;
-  };
+  const comments = movie.comments || [];
+
+  comments.splice(index, 1);
+
+  movie.comments = comments;
+  localStorage.setItem(id, JSON.stringify(movie));
+
+  location.reload();
+};
+
+// 2. 비밀번호 일치여부 확인
+function pwCheck(index, password) {
+  const currentPassword = movie.comments[index].pw; // 리뷰 객체에서 비밀번호 가져오기
+  console.log(currentPassword);
+
+  return password === currentPassword; // 비밀번호 일치 여부 반환
+}
+
+// 1. 삭제 버튼 클릭시 deleteCheck 함수 실행, index : 버튼의 index
+function deleteCheck(index) {
+  // 입력창 띄우기
+  const pwInput = document.querySelector(".comment-pw2");
+  pwInput.classList.remove("hidden");
+  pwInput.focus();
+
+  const confirmButtons = document.querySelectorAll(".comment-confirm");
+
+  // 확인 버튼 클릭 이벤트
+  confirmButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const pwInput = document.querySelector(".comment-pw2");
+      const password = pwInput.value;
+
+      if (pwCheck(index, password)) {
+        deleteReview(index);
+        pwInput.classList.add("hidden");
+        pwInput.value = "";
+      } else {
+        alert("비밀번호가 일치하지 않습니다.");
+      }
+    });
+  });
+}
 
 // --------------------------------------------------------------------------------------------------------------
 
 const displayComments = () => {
   // 이전에 저장된 댓글 가져오기
-
 
   let movie = localStorage.getItem(id); // 이전에 저장된 movie 데이터 가져오기
   movie = movie ? JSON.parse(movie) : {};
@@ -219,7 +278,6 @@ window.onload = function () {
   const updateButtons = document.querySelectorAll(".comment-edit");
   updateButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      console.log(button.dataset.index);
       buttonIndex = button.dataset.index;
       updateReview(buttonIndex);
     });
@@ -229,53 +287,10 @@ window.onload = function () {
   const deleteButtons = document.querySelectorAll(".comment-delete");
   deleteButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      
+      const index = button.dataset.index;
+      //deleteCheck(index);
+      deleteReview(index);
     });
   });
   
 };
-
-// const deleteButtons = document.querySelectorAll(".delete-btn");
-// deleteButtons.forEach((button) => {
-//   button.addEventListener("click", () => {
-//     const index = button.dataset.index;
-//     deleteComment(index);
-//   });
-// });
-
-// const deleteComment = (id) => {
-//   const urlParams = new URLSearchParams(window.location.search);
-//   const id = urlParams.get("id");
-
-//   let movie = localStorage.getItem(id);
-//   movie = movie ? JSON.parse(movie) : {};
-
-//   const comments = movie.comments || [];
-//   comments.splice(index, 1);
-
-//   movie.comments = comments;
-//   localStorage.setItem(id, JSON.stringify(movie));
-
-//   displayComments();
-// };
-
-
-
-
-const deleteReview = () => {
-
-};
-
-
-
-// ---------------------------------------------------------------------------------------------------------------
-// 1. 리뷰 저장
-//     1. id를 key으로 저장되어 있던 데이터에 review 배열 추가
-//        객체 불러오기-> 객체에 value 추가 -> 객체 저장
-
-//         1. 기존에 배열이 있을 시 배열에 객체 추가, 기존 배열 없을 시 배열 추가
-//         2. 입력값 없을 시 유효성 검사
-//         3. 저장 후 input 값 없애기
-// 2. 리뷰 불러오기
-//     1. card id 와 비교하여 일치하는 key 내의 review 배열 내의 객체를 listing
-
