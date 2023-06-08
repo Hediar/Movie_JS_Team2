@@ -93,13 +93,33 @@ header {
 }
 
 #filter-menu {
+  display: flex;
+  justify-content: space-between;
   width: 80%;
   margin: 0 auto;
-  text-align: right;
   padding-top: 100px;
 }
 
-#filter-menu > button {
+#select-country {
+  width: 100px;
+  margin-left: 15px;
+  padding: 5px 10px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #fff;
+  color: #fff;
+}
+
+#select-country > option {
+  background-color: #000;
+  border: none;
+}
+
+select:focus {
+  border: none;
+}
+
+#filter-menu button {
   width: 80px;
   height: 30px;
   margin-left: 5px;
