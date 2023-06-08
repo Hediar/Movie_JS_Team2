@@ -19,19 +19,13 @@ function changeheader(movie) {
 /*detail 페이지를 구성할 HTML*/
 const createMovieDetail = (movie) => {
   let detail_html = `
-        <img
-        src="https://image.tmdb.org/t/p/w400/${movie.poster_path}"
-        alt="영화이미지"
-        class="movie-img"
-    />
+    <img src="https://image.tmdb.org/t/p/w400/${movie.poster_path}" alt="영화이미지" class="movie-img"/>
     <div class="movie-info">
-        <h4 class="movie-rate">⭐ ${movie.vote_average}</h4>
-        <h2 class="movie-title">${movie.title}</h2>
-        <h3 class="movie-desc">
-        ${movie.overview}
-        </h3>
-    </div>
-      `;
+      <h4 class="movie-rate">⭐ ${movie.vote_average}<span class=movie-vote>(${movie.vote_count})</span></h4>
+      <h2 class="movie-title">${movie.original_title}</h2>
+      <h4 class="movie-detail"><span class="movie-date">${movie.release_date}</span><span>|</span><span class="movie-lang">${movie.original_language}</span><span>|</span><span class="movie-popularity">Popularity: ${movie.popularity}</span></h4>
+      <h3 class="movie-desc">${movie.overview}</h3>
+    </div>`;
   return detail_html;
 };
 
