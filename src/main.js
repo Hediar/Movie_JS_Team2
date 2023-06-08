@@ -119,6 +119,7 @@ loadmovies().then((movies) => {
   orderByTitle(movies);
   orderByRate(movies);
   orderByVote(movies);
+  orderByCountry(movies);
 });
 
 // 알파벳 순서에 따른 정렬 함수
@@ -136,6 +137,36 @@ function orderByTitle(movies) {
     });
     displaymovies(movies);
     changeArrow(element);
+  });
+}
+// 나라에 따른 영화 분류 함수
+function orderByCountry(movies) {
+  const dropdown = document.getElementById("select-country");
+
+  dropdown.addEventListener("change", function () {
+    const selectedOption = dropdown.options[dropdown.selectedIndex].value;
+
+    const filterMovies = movies.filter(function (movie) {
+      let language = movie.original_language;
+
+      if (selectedOption === "korea" && language === "ko") {
+        return movie;
+      } else if (selectedOption === "america" && language === "en") {
+        return movie;
+      } else if (selectedOption === "japan" && language === "ja") {
+        return movie;
+      } else if (
+        selectedOption === "etc" &&
+        language !== "ko" &&
+        language !== "en" &&
+        language != "ja"
+      ) {
+        return movie;
+      } else if (selectedOption === "all") {
+        return movie;
+      }
+    });
+    displaymovies(filterMovies);
   });
 }
 
