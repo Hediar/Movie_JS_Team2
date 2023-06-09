@@ -1,3 +1,38 @@
+
+// 전역 변수
+const urlParams = new URLSearchParams(window.location.search);
+const id = urlParams.get("id"); // 영화 id 출력됨
+let movie = JSON.parse(localStorage.getItem(id));
+
+window.addEventListener("DOMContentLoaded", () => {
+  displayDetail(movie);
+
+  const saveButton = document.getElementById("submit-btn");
+  saveButton.addEventListener("click", () => {
+    posting();
+    
+  });
+  displayComments();
+
+  // update 버튼
+  const updateButtons = document.querySelectorAll(".comment-edit");
+  updateButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      buttonIndex = button.dataset.index;
+      updateReview(buttonIndex);
+    });
+  });
+
+  // delete 버튼
+  const deleteButtons = document.querySelectorAll(".comment-delete");
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      buttonIndex = button.dataset.index;
+      deleteReview(buttonIndex);
+    });
+  });
+});
+
 /* detail HTML UPDATE & */
 const displayDetail = (data) => {
   const containerDetail = document.querySelector("#movie-info");
@@ -29,14 +64,6 @@ const createMovieDetail = (movie) => {
   return detail_html;
 };
 
-// 전역 변수
-const urlParams = new URLSearchParams(window.location.search);
-const id = urlParams.get("id"); // 영화 id 출력됨
-let movie = JSON.parse(localStorage.getItem(id));
-
-window.addEventListener("DOMContentLoaded", () => {
-  displayDetail(movie);
-});
 
 // ----------------------------------------------------------------------------------
 /* 리뷰 */
@@ -61,7 +88,6 @@ const posting = () => {
         alert("비밀번호를 입력해주세요.");
       } else {
         // 이전에 저장된 movie 데이터 가져오기
-        //movie = movie ? JSON.parse(movie) : {};
 
         // 기존 댓글이 있을 경우에는 배열에 추가, 없을 시 새로운 배열로 추가
         if (movie.comments) {
@@ -183,6 +209,7 @@ const deleteReview = (buttonIndex) => {
       alert("비밀번호가 틀렸습니다.");
     }
   });
+
   // 취소 버튼
   cancelButton.addEventListener("click", () => {
     checkPassword.classList.add(HIDDEN_CLASSNAME);
@@ -195,7 +222,6 @@ const deleteReview = (buttonIndex) => {
 //비밀번호 일치여부 확인
 function pwCheck(index, password) {
   const currentPassword = movie.comments[index].pw; // 리뷰 객체에서 비밀번호 가져오기
-
   return password === currentPassword; // 비밀번호 일치 여부 반환
 }
 
@@ -245,31 +271,4 @@ const displayComments = () => {
 
   // 댓글을 HTML에 삽입
   reviewContainer.innerHTML = commentsHTML.join("");
-};
-
-window.onload = function () {
-  const saveButton = document.getElementById("submit-btn");
-  saveButton.addEventListener("click", () => {
-    posting();
-    
-  });
-  displayComments();
-
-  // update 버튼
-  const updateButtons = document.querySelectorAll(".comment-edit");
-  updateButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      buttonIndex = button.dataset.index;
-      updateReview(buttonIndex);
-    });
-  });
-
-  // delete 버튼
-  const deleteButtons = document.querySelectorAll(".comment-delete");
-  deleteButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      buttonIndex = button.dataset.index;
-      deleteReview(buttonIndex);
-    });
-  });
 };
