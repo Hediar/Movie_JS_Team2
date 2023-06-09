@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     for (let page = 1; page <= totalPages; page++) {
       const button = document.createElement("button");
-      button.classList.add("pagination-button");
+      button.classList.add("pagination-page");
       button.dataset.page = page;
       button.textContent = page;
       paginationContainer.appendChild(button);
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
     highlightCurrentPage(currentPage);
 
     // Event listener for pagination buttons
-    const paginationButtons = document.querySelectorAll(".pagination-button");
+    const paginationButtons = document.querySelectorAll(".pagination-page");
     paginationButtons.forEach((button) => {
       button.addEventListener("click", () => {
         const page = parseInt(button.dataset.page);
