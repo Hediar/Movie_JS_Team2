@@ -223,7 +223,7 @@ footer {
   margin-bottom: 100px;
 }
 
-.pagination-button {
+.pagination-page {
   margin: 0 8px;
   padding: 10px 15px;
   cursor: pointer;
@@ -233,7 +233,7 @@ footer {
   color: white;
 }
 
-.pagination-button:hover {
+.pagination-page:hover {
   background-color: #fff;
   color: #000;
 }
@@ -257,4 +257,8 @@ footer {
 
 #right-arrow {
   margin-left: 15px;
+}
+
+.current-page {
+  color: red;
 }
