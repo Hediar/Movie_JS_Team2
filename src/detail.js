@@ -111,7 +111,7 @@ const updateReview = (buttonIndex) => {
     if (pwCheck(buttonIndex, password)) {
       // True 값 반환된다면
       checkPassword.classList.add(HIDDEN_CLASSNAME); // 비밀번호 입력 칸 안보이게
-      updateBox.classList.remove(HIDDEN_CLASSNAME); //  입력할 수 있는 창이 보인다.
+      updateBox.classList.remove(HIDDEN_CLASSNAME); // 다시 입력할 수 있는 창이 보인다.
       saveReviewButton.classList.remove(HIDDEN_CLASSNAME);
 
       // 저장 버튼이 눌러지면 적혀져 있는 것은 저장하고 다시 기존 형태로 display 해주어야 한다.
