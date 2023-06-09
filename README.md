@@ -26,8 +26,8 @@ TMDB open API를 가져와서 영화 리스트 정보들을 가져왔습니다.
 |                                                      메인 페이지                                                       |                                                      상세 페이지                                                       |
 | :--------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------: |
 | <img width="400" src="https://github.com/Hediar/Movie_JS_Team2/assets/72387948/f41858b5-5eee-447b-80f1-5c003760941f"/> | <img width="400" src="https://github.com/Hediar/Movie_JS_Team2/assets/72387948/3f52e268-6406-4cf0-b09b-de12c259bdb1"/> |
-|                                                    메인 페이지 기능                                                    |                                                    상세 페이지 기능                                                    |
-|                                               <img width="329" src=""/>                                                |                                               <img width="329" src=""/>                                                |
+|                                                     카테고리                                                     |                                                    리뷰                                                     |
+|                                               <img width="329" src="https://github.com/Hediar/Movie_JS_Team2/assets/72387948/ffca5d66-34f0-461b-8a4a-b459890f9d3e"/>                                                |                                               <img width="329" src="https://github.com/Hediar/Movie_JS_Team2/assets/72387948/99c23835-a431-4e32-bbba-a992f17a45dc"/>                                                |
 
 ---
 
