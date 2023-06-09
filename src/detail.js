@@ -104,6 +104,14 @@ const updateReview = (buttonIndex) => {
   viewReview.classList.add(HIDDEN_CLASSNAME); // 기존 코멘트, 버튼 보이지 않게 만든다.
   currentReview.classList.add(HIDDEN_CLASSNAME);
 
+  // 취소 버튼
+  cancelButton.addEventListener("click", () => {
+    checkPassword.classList.add(HIDDEN_CLASSNAME);
+    viewReview.classList.remove(HIDDEN_CLASSNAME);
+    currentReview.classList.remove(HIDDEN_CLASSNAME);
+    return false;
+  });
+
   // 확인 버튼
   confirmButtons.addEventListener("click", () => {
     const password = userReviewElement.querySelector(".comment-pw2").value;
@@ -114,27 +122,22 @@ const updateReview = (buttonIndex) => {
       updateBox.classList.remove(HIDDEN_CLASSNAME); // 다시 입력할 수 있는 창이 보인다.
       saveReviewButton.classList.remove(HIDDEN_CLASSNAME);
 
-      // 저장 버튼이 눌러지면 적혀져 있는 것은 저장하고 다시 기존 형태로 display 해주어야 한다.
-      updateButton.addEventListener("click", () => {
-        const newComment =
-          userReviewElement.querySelector("#update-comment").value;
-        let updateData = movie.comments[buttonIndex];
-
-        updateData.review = `${newComment}`;
-
-        localStorage.setItem(id, JSON.stringify(movie));
-        alert("수정되었습니다");
-        location.reload();
-      });
     } else {
       alert("비밀번호가 틀렸습니다.");
     }
   });
-  // 취소 버튼
-  cancelButton.addEventListener("click", () => {
-    checkPassword.classList.add(HIDDEN_CLASSNAME);
-    viewReview.classList.remove(HIDDEN_CLASSNAME);
-    currentReview.classList.remove(HIDDEN_CLASSNAME);
+  
+  // 저장 버튼이 눌러지면 적혀져 있는 것은 저장하고 다시 기존 형태로 display 해주어야 한다.
+  updateButton.addEventListener("click", () => {
+    const newComment =
+      userReviewElement.querySelector("#update-comment").value;
+    let updateData = movie.comments[buttonIndex];
+
+    updateData.review = `${newComment}`;
+
+    localStorage.setItem(id, JSON.stringify(movie));
+    alert("수정되었습니다");
+    location.reload();
   });
 };
 
@@ -254,7 +257,9 @@ window.onload = function () {
   updateButtons.forEach((button) => {
     button.addEventListener("click", () => {
       buttonIndex = button.dataset.index;
-      updateReview(buttonIndex);
+      if(updateReview(buttonIndex)){
+        updateReview(buttonIndex);
+      }
     });
   });
 
