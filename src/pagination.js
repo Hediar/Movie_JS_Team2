@@ -22,6 +22,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const changePage = (page) => {
     currentPage = page;
     showMoviesOnPage(currentPage);
+    highlightCurrentPage(currentPage); // Call the highlightCurrentPage function
+  };
+
+  const highlightCurrentPage = (currentPage) => {
+    const paginationButtons = document.querySelectorAll(".pagination-page");
+    paginationButtons.forEach((button) => {
+      const page = parseInt(button.dataset.page);
+      if (page === currentPage) {
+        button.classList.add("current-page"); // Add a CSS class to change the color
+      } else {
+        button.classList.remove("current-page"); // Remove the CSS class if it was added previously
+      }
+    });
   };
 
   const loadMoviesAndInitializePagination = async () => {
@@ -43,6 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Example usage:
     showMoviesOnPage(currentPage);
+    highlightCurrentPage(currentPage);
 
     // Event listener for pagination buttons
     const paginationButtons = document.querySelectorAll(".pagination-button");
@@ -57,14 +71,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const leftArrowButton = document.createElement("button");
     leftArrowButton.classList.add("arrow-button");
     leftArrowButton.id = "left-arrow";
-    leftArrowButton.innerHTML = "&#8592;"; // Left arrow unicode
+    leftArrowButton.innerHTML = "←"; // Left arrow unicode
     paginationContainer.prepend(leftArrowButton);
 
     // Create right arrow button
     const rightArrowButton = document.createElement("button");
     rightArrowButton.classList.add("arrow-button");
     rightArrowButton.id = "right-arrow";
-    rightArrowButton.innerHTML = "&#8594;"; // Right arrow unicode
+    rightArrowButton.innerHTML = "→"; // Right arrow unicode
     paginationContainer.appendChild(rightArrowButton);
 
     // Event listener for left arrow button
