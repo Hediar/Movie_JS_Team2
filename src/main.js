@@ -63,8 +63,12 @@ const onClickCard = function(movies) {
       id_d = this.getAttribute('id');
       //alert('해당 영화의 id는 ' + id_d + '입니다.');
 
+
       detail_id = movies.find(movie => movie.id.toString() === id_d);
-      window.location.href = `http://127.0.0.1:5501/detail.html?id=${id_d}`; // 페이지 이동 
+      let movieName= detail_id.title;
+      localStorage.setItem("movie_name", movieName);
+
+      window.location.href = `http://127.0.0.1:5500/detail.html?id=${id_d}`; // 페이지 이동 
       
       //console.log(detail_id);
 
@@ -74,6 +78,7 @@ const onClickCard = function(movies) {
   })
 
 };
+
 
 
 
@@ -126,6 +131,7 @@ loadmovies().then((movies) => {
   orderByVote(movies);
   orderByCountry(movies);
 });
+
 
 // 알파벳 순서에 따른 정렬 함수
 function orderByTitle(movies) {

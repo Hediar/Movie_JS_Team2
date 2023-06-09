@@ -219,3 +219,9 @@ header > a {
   width: 100px;
   height: 50px;
 }
+
+#player{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
