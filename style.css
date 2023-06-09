@@ -216,6 +216,7 @@ footer {
   height: 200px;
 }
 
+/*pagenation*/
 .pagination {
   display: flex;
   justify-content: center;
@@ -262,3 +263,4 @@ footer {
 .current-page {
   color: red;
 }
+
