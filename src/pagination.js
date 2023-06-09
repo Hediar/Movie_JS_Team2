@@ -72,13 +72,13 @@ document.addEventListener("DOMContentLoaded", () => {
     leftArrowButton.classList.add("arrow-button");
     leftArrowButton.id = "left-arrow";
     leftArrowButton.innerHTML = "←"; // Left arrow unicode
-    paginationContainer.prepend(leftArrowButton);
 
     // Create right arrow button
     const rightArrowButton = document.createElement("button");
     rightArrowButton.classList.add("arrow-button");
     rightArrowButton.id = "right-arrow";
     rightArrowButton.innerHTML = "→"; // Right arrow unicode
+
     paginationContainer.appendChild(rightArrowButton);
 
     // Event listener for left arrow button
