@@ -1,3 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap");
+
 * {
   box-sizing: border-box;
   margin: 0px;
@@ -6,35 +12,80 @@
 a {
   text-decoration: none;
 }
-body {
-  width: 100%;
-  min-width: 1000px;
-  background-color: rgb(23, 21, 21);
+button {
+  cursor: pointer;
 }
-.title {
+body {
+  position: relative;
+  width: 100%;
+  min-width: 1050px;
+  background-color: rgb(23, 21, 21);
+
+  font-family: "Noto Sans KR", sans-serif;
+}
+#background {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 60%;
+  background: #000;
+  background-image: linear-gradient(rgba(0, 0, 0, 25%), rgba(0, 0, 0, 100%));
+
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: cover;
+
+  z-index: -1;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 60%;
+  height: 600px;
+  margin: 0 auto;
+  color: #fff;
+}
+
+header > h1 {
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 200px;
+  font-family: "Newsreader", serif;
+  font-size: 80px;
+  text-align: center;
+}
+header > a {
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #fff;
+}
+
+/* .title {
   width: 100%;
   text-align: center;
-  font-size: 2rem;
-  line-height: 45px;
+  z-index: 10;
+} */
+
+/* .title > a > h1 {
+  font-size: 40px;
   color: white;
-  margin: 50px auto;
-}
-.title > a > h1 {
-  font-size: 48px;
-  color: white;
-  padding: 50px 0px 30px;
-}
+} */
 .inner {
   width: 60%;
   background-color: rgb(255, 255, 255);
-  margin: 0px auto 50px;
+  margin: 0px auto 600px;
   padding: 50px;
   border-radius: 30px;
+  z-index: 99;
 }
 #movie-info {
   display: flex;
   width: 100%;
-  height: 300px;
+  height: 350px;
+  padding-bottom: 50px;
+  border-bottom: 1px solid #ebebeb;
 }
 .movie-img {
   display: block;
@@ -42,7 +93,7 @@ body {
 .movie-info {
   width: 100%;
   padding: 0px 30px;
-  margin: 10px auto;
+  margin: 0 auto;
   overflow: auto;
 }
 .movie-info::-webkit-scrollbar {
@@ -53,47 +104,106 @@ body {
   background-color: #999;
 }
 .movie-rate {
-  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+
+  padding-bottom: 15px;
   border-bottom: 1px solid #999;
+
   font-size: 20px;
+  font-weight: 700;
+}
+.movie-rate > span {
+  margin-left: 6px;
+  font-size: 17px;
+  font-weight: 300;
+  color: #666;
 }
 .movie-title {
-  font-size: 30px;
+  font-size: 24px;
+  padding: 20px 0;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+.movie-detail {
+  display: flex;
+  align-items: center;
   padding: 10px 0;
+  border-top: 1px solid #999;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+}
+.movie-detail > span:nth-child(2),
+.movie-detail > span:nth-child(4) {
+  margin: 0 10px;
+  color: #bbb;
+}
+.movie-lang {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #999;
+}
+.movie-popularity {
+  font-size: 12px;
 }
 .movie-desc {
-  padding-top: 10px;
+  padding: 15px 0 5px;
   border-top: 1px solid #999;
+
+  color: #333;
+
   font-size: 16px;
   font-weight: 400;
+  letter-spacing: 0.2px;
+  line-height: 1.5;
 }
-#review {
-  width: 100%;
-  margin: 50px auto;
-}
+
 .user-review {
   display: flex;
   justify-content: space-between;
   width: 100%;
   margin: 30px 0px;
 }
+.written-comment {
+  width: 100%;
+  flex-grow: 1;
+}
+.writer {
+  font-weight: 700;
+  margin-bottom: 10px;
+}
 .review-comment {
   flex-grow: 1;
+
+  color: #444;
+
+  font-size: 16px;
+  line-height: 1.5;
 }
 .edit-box {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   width: 100px;
   margin-left: 20px;
 }
 .btns {
   display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
   width: 100px;
+  margin-right: 5px;
 }
 .btns > button {
-  width: 50%;
-  height: 30px;
+  margin-left: 10px;
+  font-size: 12px;
+  border: 0;
+  color: #999;
+  background-color: transparent;
+}
+.btns > button:hover {
+  color: #333;
 }
 .comment-edit {
   margin-right: 10px;
@@ -104,9 +214,10 @@ body {
   height: 30px;
   margin: 10px auto;
 }
-/* .edit-box > .comment-pw {
-      display: none;
-    } */
+
+.edit-box > .comment-pw {
+  display: none;
+}
 
 /* 평상시에는 none처리, 수정/삭제버튼 클릭시 display:block 처리되겠끔 하면 됨 */
 
@@ -114,13 +225,19 @@ body {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin: 30px auto;
+  margin: 50px auto;
 }
-#write-comment {
+#write-comment, #update-comment {
+  width: 100%;
   flex-grow: 1;
   margin-right: 20px;
-  font-size: 16px;
   padding: 10px;
+
+  color: #666;
+
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
 }
 .submit-btns {
   display: flex;
@@ -136,26 +253,23 @@ body {
   height: 50px;
 }
 
-/* ------------------------------------------------------------------------------------- */
+/* 패스워드 체크 */
 
-.menu {
-  width: 27%;
-  margin-left: auto;
-}
-.menu > ul {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.menu > ul > a {
-  text-decoration: none;
-  color: white;
-  font-size: 20px;
+#password-check {
   margin-top: 10px;
 }
 
-.menu > ul > a:hover {
-  color: gray;
+#password-check > .comment-pw2 {
+  width: 120px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+#password-check > .comment-confirm, .cancel {
+  width: 40px;
+  height: 30px;
+}
+
+.hidden {
+  display: none;
 }

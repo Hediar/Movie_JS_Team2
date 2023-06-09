@@ -1,3 +1,5 @@
+import * as load from "./main.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const moviesPerPage = 6; // Number of movies to show per page
   let currentPage = 1; // Current page number
@@ -10,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     movieCards.forEach((card, index) => {
       if (index >= startIndex && index < endIndex) {
-        card.style.display = "block";
+        card.style.display = "flex";
       } else {
         card.style.display = "none";
       }
@@ -20,10 +22,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const changePage = (page) => {
     currentPage = page;
     showMoviesOnPage(currentPage);
+    highlightCurrentPage(currentPage); // Call the highlightCurrentPage function
+  };
+
+  const highlightCurrentPage = (currentPage) => {
+    const paginationButtons = document.querySelectorAll(".pagination-page");
+    paginationButtons.forEach((button) => {
+      const page = parseInt(button.dataset.page);
+      if (page === currentPage) {
+        button.classList.add("current-page"); // Add a CSS class to change the color
+      } else {
+        button.classList.remove("current-page"); // Remove the CSS class if it was added previously
+      }
+    });
   };
 
   const loadMoviesAndInitializePagination = async () => {
-    const movies = await loadmovies();
+    const movies = await load.loadmovies();
     const movieCards = document.querySelectorAll(".movie-card");
     const totalPages = Math.ceil(movieCards.length / moviesPerPage);
 
@@ -33,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     for (let page = 1; page <= totalPages; page++) {
       const button = document.createElement("button");
-      button.classList.add("pagination-button");
+      button.classList.add("pagination-page");
       button.dataset.page = page;
       button.textContent = page;
       paginationContainer.appendChild(button);
@@ -41,9 +56,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Example usage:
     showMoviesOnPage(currentPage);
+    highlightCurrentPage(currentPage);
 
     // Event listener for pagination buttons
-    const paginationButtons = document.querySelectorAll(".pagination-button");
+    const paginationButtons = document.querySelectorAll(".pagination-page");
     paginationButtons.forEach((button) => {
       button.addEventListener("click", () => {
         const page = parseInt(button.dataset.page);
@@ -55,14 +71,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const leftArrowButton = document.createElement("button");
     leftArrowButton.classList.add("arrow-button");
     leftArrowButton.id = "left-arrow";
-    leftArrowButton.innerHTML = "&#8592;"; // Left arrow unicode
-    paginationContainer.prepend(leftArrowButton);
+    leftArrowButton.innerHTML = "←"; // Left arrow unicode
 
     // Create right arrow button
     const rightArrowButton = document.createElement("button");
     rightArrowButton.classList.add("arrow-button");
     rightArrowButton.id = "right-arrow";
-    rightArrowButton.innerHTML = "&#8594;"; // Right arrow unicode
+    rightArrowButton.innerHTML = "→"; // Right arrow unicode
+
     paginationContainer.appendChild(rightArrowButton);
 
     // Event listener for left arrow button
