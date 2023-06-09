@@ -91,7 +91,7 @@ const updateReview = (buttonIndex) => {
   const updateBox = userReviewElement.querySelector("#update");
   const currentReview = userReviewElement.querySelector(".review-comment");
   const viewReview = userReviewElement.querySelector(".btns");
-  const saveRevoewButton = userReviewElement.querySelector("#submit-btn");
+  const saveReviewButton = userReviewElement.querySelector("#submit-btn");
 
   const updateButton = userReviewElement.querySelector("#submit-btn");
 
@@ -111,8 +111,8 @@ const updateReview = (buttonIndex) => {
     if (pwCheck(buttonIndex, password)) {
       // True 값 반환된다면
       checkPassword.classList.add(HIDDEN_CLASSNAME); // 비밀번호 입력 칸 안보이게
-      updateBox.classList.remove(HIDDEN_CLASSNAME); // 다시 입력할 수 있는 창이 보인다.
-      saveRevoewButton.classList.remove(HIDDEN_CLASSNAME);
+      updateBox.classList.remove(HIDDEN_CLASSNAME); //  입력할 수 있는 창이 보인다.
+      saveReviewButton.classList.remove(HIDDEN_CLASSNAME);
 
       // 저장 버튼이 눌러지면 적혀져 있는 것은 저장하고 다시 기존 형태로 display 해주어야 한다.
       updateButton.addEventListener("click", () => {
@@ -172,7 +172,7 @@ const deleteReview = (buttonIndex) => {
 
       alert("삭제되었습니다");
       location.reload();
-      displayComments();
+      
     } else {
       alert("비밀번호가 틀렸습니다.");
     }
