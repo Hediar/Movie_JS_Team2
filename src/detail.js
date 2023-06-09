@@ -104,8 +104,8 @@ const updateReview = (buttonIndex) => {
   viewReview.classList.add(HIDDEN_CLASSNAME); // 기존 코멘트, 버튼 보이지 않게 만든다.
   currentReview.classList.add(HIDDEN_CLASSNAME);
 
-  // 확인 버튼
-  confirmButtons.addEventListener("click", () => {
+  // 확인버튼 눌렀을 때 
+  const handleConfirmButton = () => {
     const password = userReviewElement.querySelector(".comment-pw2").value;
     //비밀번호가 맞다면 수정 박스가 나타나게 만든다.
     if (pwCheck(buttonIndex, password)) {
@@ -129,9 +129,15 @@ const updateReview = (buttonIndex) => {
     } else {
       alert("비밀번호가 틀렸습니다.");
     }
-  });
+  };
+
+  // 확인 버튼
+  confirmButtons.addEventListener("click", handleConfirmButton);
+
   // 취소 버튼
   cancelButton.addEventListener("click", () => {
+    confirmButtons.removeEventListener("click", handleConfirmButton);
+
     checkPassword.classList.add(HIDDEN_CLASSNAME);
     viewReview.classList.remove(HIDDEN_CLASSNAME);
     currentReview.classList.remove(HIDDEN_CLASSNAME);
