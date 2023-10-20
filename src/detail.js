@@ -1,4 +1,3 @@
-
 // 전역 변수
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get("id"); // 영화 id 출력됨
@@ -10,7 +9,6 @@ window.addEventListener("DOMContentLoaded", () => {
   const saveButton = document.getElementById("submit-btn");
   saveButton.addEventListener("click", () => {
     posting();
-    
   });
   displayComments();
 
@@ -38,6 +36,7 @@ const displayDetail = (data) => {
   const containerDetail = document.querySelector("#movie-info");
   let movieDetail = createMovieDetail(data.movie);
   containerDetail.innerHTML = movieDetail;
+  console.log(movieDetail);
   changeheader(data.movie);
 };
 
@@ -63,7 +62,6 @@ const createMovieDetail = (movie) => {
     </div>`;
   return detail_html;
 };
-
 
 // ----------------------------------------------------------------------------------
 /* 리뷰 */
@@ -130,7 +128,7 @@ const updateReview = (buttonIndex) => {
   viewReview.classList.add(HIDDEN_CLASSNAME); // 기존 코멘트, 버튼 보이지 않게 만든다.
   currentReview.classList.add(HIDDEN_CLASSNAME);
 
-  // 확인버튼 눌렀을 때 
+  // 확인버튼 눌렀을 때
   const handleConfirmButton = () => {
     const password = userReviewElement.querySelector(".comment-pw2").value;
     //비밀번호가 맞다면 수정 박스가 나타나게 만든다.
@@ -204,7 +202,6 @@ const deleteReview = (buttonIndex) => {
 
       alert("삭제되었습니다");
       location.reload();
-      
     } else {
       alert("비밀번호가 틀렸습니다.");
     }

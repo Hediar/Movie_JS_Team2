@@ -1,4 +1,11 @@
-import * as apikey from "./apikey.js";
+// import * as apikey from "./apikey.js";
+// require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config();
+
+const AUT = process.env.AUT;
+const APIURL = process.env.APIURL;
+const BASE_URL = process.env.DEPLOY_BASE_URL;
 
 // movies api
 export const loadmovies = async () => {
@@ -6,10 +13,10 @@ export const loadmovies = async () => {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization: apikey.aut,
+      Authorization: AUT,
     },
   };
-  const response = await fetch(apikey.apiUrl, options);
+  const response = await fetch(APIURL, options);
   const data = await response.json();
   //console.log(data['results']);
   return data["results"];
@@ -65,7 +72,7 @@ const onClickCard = function (movies) {
       //alert('해당 영화의 id는 ' + id_d + '입니다.');
 
       detail_id = movies.find((movie) => movie.id.toString() === id_d);
-      window.location.href = `http://127.0.0.1:5501/detail.html?id=${id_d}`; // 페이지 이동
+      window.location.href = `${BASE_URL}detail.html?id=${id_d}`; // 페이지 이동
 
       /* 해당 id에 맞는 객체 배열을 저장한다. 
       같은 id가 없을 경우에만 저장한다.*/
